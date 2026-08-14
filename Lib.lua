@@ -1,275 +1,561 @@
---[[
-	Полная локальная версия скрипта на нашей GUI-библиотеке.
-	Внешняя загрузка LinoriaLib, ThemeManager и SaveManager не используется.
-
-	Управление окном:
-	- RightShift: скрыть / показать GUI;
-	- X: скрыть GUI (RightShift вернёт его);
-	- кнопка "−": свернуть / развернуть;
-	- верхняя панель: перетаскивание;
-	- правый нижний угол: изменение размера.
-]]
-
--- ===== SERVICES =====
+-- FRVGMXNT GUI2LUA CONVERTER 1.2. Like pls!
+local LibGui = {
+	LibGui = Instance.new("ScreenGui"),
+	Main = Instance.new("Frame"),
+	UIStroke = Instance.new("UIStroke"),
+	I = Instance.new("Frame"),
+	UIStroke_2 = Instance.new("UIStroke"),
+	Name = Instance.new("TextLabel"),
+	X = Instance.new("TextButton"),
+	_ = Instance.new("TextButton"),
+	V = Instance.new("Frame"),
+	UIStroke_3 = Instance.new("UIStroke"),
+	CT = Instance.new("Frame"),
+	UIStroke_4 = Instance.new("UIStroke"),
+	CTEXT = Instance.new("TextLabel"),
+	UIStroke_5 = Instance.new("UIStroke"),
+	TextButton = Instance.new("TextButton"),
+	UIStroke_6 = Instance.new("UIStroke"),
+	ToggleText = Instance.new("TextLabel"),
+	Off = Instance.new("TextButton"),
+	UIStroke_7 = Instance.new("UIStroke"),
+	On = Instance.new("TextButton"),
+	UIStroke_8 = Instance.new("UIStroke"),
+	UIStroke_9 = Instance.new("UIStroke"),
+	SliderText = Instance.new("TextLabel"),
+	UIStroke_10 = Instance.new("UIStroke"),
+	Bask = Instance.new("Frame"),
+	Slider = Instance.new("Frame"),
+	C = Instance.new("ScrollingFrame"),
+	UIStroke_11 = Instance.new("UIStroke"),
+	Tab = Instance.new("TextButton"),
+	UIGridLayout = Instance.new("UIListLayout"),
+	Tab1 = Instance.new("TextButton"),
+}
 
 local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local Lighting = game:GetService("Lighting")
-local Workspace = game:GetService("Workspace")
-local UserInputService = game:GetService("UserInputService")
+local PlayerGui = Players.LocalPlayer:WaitForChild("PlayerGui")
 
-local LocalPlayer = Players.LocalPlayer
-local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
-local Mouse = LocalPlayer:GetMouse()
-
--- ===== OUR OPTIMIZED GUI LIBRARY =====
-
-local previousGui = PlayerGui:FindFirstChild("OurLibGui")
-if previousGui then
-	previousGui:Destroy()
+-- Повторный запуск не оставляет старую копию интерфейса и её обработчики.
+local PreviousGui = PlayerGui:FindFirstChild("LibGui")
+if PreviousGui then
+	PreviousGui:Destroy()
 end
 
+LibGui.LibGui.Parent = PlayerGui
+LibGui.Main.Parent = LibGui.LibGui
+LibGui.UIStroke.Parent = LibGui.Main
+LibGui.I.Parent = LibGui.Main
+LibGui.UIStroke_2.Parent = LibGui.I
+LibGui.Name.Parent = LibGui.I
+LibGui.X.Parent = LibGui.I
+LibGui._.Parent = LibGui.I
+LibGui.V.Parent = LibGui.Main
+LibGui.UIStroke_3.Parent = LibGui.V
+LibGui.CT.Parent = LibGui.V
+LibGui.UIStroke_4.Parent = LibGui.CT
+LibGui.CTEXT.Parent = LibGui.CT
+LibGui.UIStroke_5.Parent = LibGui.CTEXT
+LibGui.TextButton.Parent = LibGui.CT
+LibGui.UIStroke_6.Parent = LibGui.TextButton
+LibGui.ToggleText.Parent = LibGui.CT
+LibGui.Off.Parent = LibGui.ToggleText
+LibGui.UIStroke_7.Parent = LibGui.Off
+LibGui.On.Parent = LibGui.ToggleText
+LibGui.UIStroke_8.Parent = LibGui.On
+LibGui.UIStroke_9.Parent = LibGui.ToggleText
+LibGui.SliderText.Parent = LibGui.CT
+LibGui.UIStroke_10.Parent = LibGui.SliderText
+LibGui.Bask.Parent = LibGui.SliderText
+LibGui.Slider.Parent = LibGui.SliderText
+LibGui.C.Parent = LibGui.Main   -- временно, позже перенесём в V
+LibGui.UIStroke_11.Parent = LibGui.C
+LibGui.Tab.Parent = LibGui.C
+LibGui.UIGridLayout.Parent = LibGui.C
+LibGui.Tab1.Parent = LibGui.C
+
+LibGui.LibGui.Name = "LibGui"
+LibGui.LibGui.ResetOnSpawn = false
+LibGui.LibGui.IgnoreGuiInset = false
+LibGui.LibGui.DisplayOrder = 1000
+LibGui.LibGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+LibGui.Main.Name = "Main"
+LibGui.Main.ZIndex = 1
+LibGui.Main.Position = UDim2.new(0.353467554, 0, 0.209331647, 0)
+LibGui.Main.Size = UDim2.new(0, 392, 0, 460)
+LibGui.Main.BackgroundColor3 = Color3.fromRGB(13,13,13)
+LibGui.Main.BackgroundTransparency = 0
+LibGui.Main.Visible = true
+LibGui.Main.AnchorPoint = Vector2.new(0, 0)
+LibGui.Main.ClipsDescendants = true
+LibGui.Main.BorderSizePixel = 0
+
+LibGui.UIStroke.Name = "UIStroke"
+LibGui.UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+LibGui.UIStroke.Color = Color3.fromRGB(0,0,0)
+LibGui.UIStroke.LineJoinMode = Enum.LineJoinMode.Miter
+LibGui.UIStroke.Thickness = 2.9000000953674316
+LibGui.UIStroke.Transparency = 0
+LibGui.UIStroke.Enabled = true
+
+LibGui.I.Name = "I"
+LibGui.I.ZIndex = 1
+LibGui.I.Position = UDim2.new(-0.00112432358, 0, 0.00063595979, 0)
+LibGui.I.Size = UDim2.new(1, 0, 0, 37)
+LibGui.I.BackgroundColor3 = Color3.fromRGB(9,9,9)
+LibGui.I.BackgroundTransparency = 0
+LibGui.I.Visible = true
+LibGui.I.AnchorPoint = Vector2.new(0, 0)
+LibGui.I.ClipsDescendants = false
+LibGui.I.BorderSizePixel = 0
+
+LibGui.UIStroke_2.Name = "UIStroke"
+LibGui.UIStroke_2.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+LibGui.UIStroke_2.Color = Color3.fromRGB(0,0,0)
+LibGui.UIStroke_2.LineJoinMode = Enum.LineJoinMode.Miter
+LibGui.UIStroke_2.Thickness = 2.9000000953674316
+LibGui.UIStroke_2.Transparency = 0
+LibGui.UIStroke_2.Enabled = true
+
+LibGui.Name.Name = "Name"
+LibGui.Name.ZIndex = 1
+LibGui.Name.Position = UDim2.new(0, 0, -0.00790652726, 0)
+LibGui.Name.Size = UDim2.new(0, 298, 0, 37)
+LibGui.Name.BackgroundColor3 = Color3.fromRGB(255,255,255)
+LibGui.Name.BackgroundTransparency = 1
+LibGui.Name.Text = "Name"  -- по умолчанию, потом изменим в конце
+LibGui.Name.TextScaled = true
+LibGui.Name.TextSize = 14
+LibGui.Name.Font = Enum.Font.FredokaOne
+LibGui.Name.TextColor3 = Color3.fromRGB(255,255,255)
+LibGui.Name.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+LibGui.Name.TextStrokeTransparency = 1
+LibGui.Name.TextWrapped = true
+LibGui.Name.TextXAlignment = Enum.TextXAlignment.Center
+LibGui.Name.TextYAlignment = Enum.TextYAlignment.Center
+LibGui.Name.TextTransparency = 0
+LibGui.Name.Visible = true
+LibGui.Name.AnchorPoint = Vector2.new(0, 0)
+LibGui.Name.ClipsDescendants = false
+
+LibGui.X.Name = "X"
+LibGui.X.ZIndex = 1
+LibGui.X.Position = UDim2.new(0.903061211, 0, -0.0270270277, 0)
+LibGui.X.Size = UDim2.new(0, 38, 0, 36)
+LibGui.X.BackgroundColor3 = Color3.fromRGB(255,255,255)
+LibGui.X.BackgroundTransparency = 1
+LibGui.X.Text = "X"
+LibGui.X.TextScaled = true
+LibGui.X.TextSize = 14
+LibGui.X.Font = Enum.Font.FredokaOne
+LibGui.X.TextColor3 = Color3.fromRGB(255,0,0)
+LibGui.X.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+LibGui.X.TextStrokeTransparency = 1
+LibGui.X.TextWrapped = true
+LibGui.X.TextXAlignment = Enum.TextXAlignment.Center
+LibGui.X.TextYAlignment = Enum.TextYAlignment.Center
+LibGui.X.TextTransparency = 0
+LibGui.X.Visible = true
+LibGui.X.AnchorPoint = Vector2.new(0, 0)
+LibGui.X.ClipsDescendants = false
+
+LibGui._.Name = "-"
+LibGui._.ZIndex = 1
+LibGui._.Position = UDim2.new(0.806122422, 0, -0.0270270277, 0)
+LibGui._.Size = UDim2.new(0, 38, 0, 36)
+LibGui._.BackgroundColor3 = Color3.fromRGB(255,255,255)
+LibGui._.BackgroundTransparency = 1
+LibGui._.Text = "-"
+LibGui._.TextScaled = true
+LibGui._.TextSize = 14
+LibGui._.Font = Enum.Font.FredokaOne
+LibGui._.TextColor3 = Color3.fromRGB(255,225,0)
+LibGui._.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+LibGui._.TextStrokeTransparency = 1
+LibGui._.TextWrapped = true
+LibGui._.TextXAlignment = Enum.TextXAlignment.Center
+LibGui._.TextYAlignment = Enum.TextYAlignment.Center
+LibGui._.TextTransparency = 0
+LibGui._.Visible = true
+LibGui._.AnchorPoint = Vector2.new(0, 0)
+LibGui._.ClipsDescendants = false
+
+LibGui.V.Name = "V"
+LibGui.V.ZIndex = 1
+LibGui.V.Position = UDim2.new(0, 0, 0, 37)
+LibGui.V.Size = UDim2.new(1, 0, 1, -37)
+LibGui.V.BackgroundColor3 = Color3.fromRGB(9,9,9)
+LibGui.V.BackgroundTransparency = 0
+LibGui.V.Visible = true
+LibGui.V.AnchorPoint = Vector2.new(0, 0)
+LibGui.V.ClipsDescendants = false
+LibGui.V.BorderSizePixel = 0
+
+LibGui.UIStroke_3.Name = "UIStroke"
+LibGui.UIStroke_3.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+LibGui.UIStroke_3.Color = Color3.fromRGB(0,0,0)
+LibGui.UIStroke_3.LineJoinMode = Enum.LineJoinMode.Miter
+LibGui.UIStroke_3.Thickness = 2.9000000953674316
+LibGui.UIStroke_3.Transparency = 0
+LibGui.UIStroke_3.Enabled = true
+
+LibGui.CT.Name = "CT"
+LibGui.CT.ZIndex = 1
+LibGui.CT.Position = UDim2.new(0.0488505736, 0, 0.035502959, 0)
+LibGui.CT.Size = UDim2.new(0, 131, 0, 133)
+LibGui.CT.BackgroundColor3 = Color3.fromRGB(7,7,7)
+LibGui.CT.BackgroundTransparency = 0
+LibGui.CT.Visible = true
+LibGui.CT.AnchorPoint = Vector2.new(0, 0)
+LibGui.CT.ClipsDescendants = false
+LibGui.CT.BorderSizePixel = 0
+
+LibGui.UIStroke_4.Name = "UIStroke"
+LibGui.UIStroke_4.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+LibGui.UIStroke_4.Color = Color3.fromRGB(0,0,0)
+LibGui.UIStroke_4.LineJoinMode = Enum.LineJoinMode.Miter
+LibGui.UIStroke_4.Thickness = 2.9000000953674316
+LibGui.UIStroke_4.Transparency = 0
+LibGui.UIStroke_4.Enabled = true
+
+LibGui.CTEXT.Name = "CTEXT"
+LibGui.CTEXT.ZIndex = 1
+LibGui.CTEXT.Position = UDim2.new(0, 0, 0, 0)
+LibGui.CTEXT.Size = UDim2.new(0, 131, 0, 16)
+LibGui.CTEXT.BackgroundColor3 = Color3.fromRGB(255,255,255)
+LibGui.CTEXT.BackgroundTransparency = 1
+LibGui.CTEXT.Text = "CT"
+LibGui.CTEXT.TextScaled = false
+LibGui.CTEXT.TextSize = 14
+LibGui.CTEXT.Font = Enum.Font.FredokaOne
+LibGui.CTEXT.TextColor3 = Color3.fromRGB(255,255,255)
+LibGui.CTEXT.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+LibGui.CTEXT.TextStrokeTransparency = 1
+LibGui.CTEXT.TextWrapped = false
+LibGui.CTEXT.TextXAlignment = Enum.TextXAlignment.Center
+LibGui.CTEXT.TextYAlignment = Enum.TextYAlignment.Center
+LibGui.CTEXT.TextTransparency = 0
+LibGui.CTEXT.Visible = true
+LibGui.CTEXT.AnchorPoint = Vector2.new(0, 0)
+LibGui.CTEXT.ClipsDescendants = false
+
+LibGui.UIStroke_5.Name = "UIStroke"
+LibGui.UIStroke_5.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+LibGui.UIStroke_5.Color = Color3.fromRGB(0,0,0)
+LibGui.UIStroke_5.LineJoinMode = Enum.LineJoinMode.Miter
+LibGui.UIStroke_5.Thickness = 2.9000000953674316
+LibGui.UIStroke_5.Transparency = 0
+LibGui.UIStroke_5.Enabled = true
+
+LibGui.TextButton.Name = "TextButton"
+LibGui.TextButton.ZIndex = 1
+LibGui.TextButton.Position = UDim2.new(0, 0, 0.172043011, 0)
+LibGui.TextButton.Size = UDim2.new(0, 131, 0, 22)
+LibGui.TextButton.BackgroundColor3 = Color3.fromRGB(255,255,255)
+LibGui.TextButton.BackgroundTransparency = 1
+LibGui.TextButton.Text = "Button"
+LibGui.TextButton.TextScaled = false
+LibGui.TextButton.TextSize = 14
+LibGui.TextButton.Font = Enum.Font.FredokaOne
+LibGui.TextButton.TextColor3 = Color3.fromRGB(255,255,255)
+LibGui.TextButton.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+LibGui.TextButton.TextStrokeTransparency = 1
+LibGui.TextButton.TextWrapped = false
+LibGui.TextButton.TextXAlignment = Enum.TextXAlignment.Center
+LibGui.TextButton.TextYAlignment = Enum.TextYAlignment.Center
+LibGui.TextButton.TextTransparency = 0
+LibGui.TextButton.Visible = true
+LibGui.TextButton.AnchorPoint = Vector2.new(0, 0)
+LibGui.TextButton.ClipsDescendants = false
+
+LibGui.UIStroke_6.Name = "UIStroke"
+LibGui.UIStroke_6.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+LibGui.UIStroke_6.Color = Color3.fromRGB(0,0,0)
+LibGui.UIStroke_6.LineJoinMode = Enum.LineJoinMode.Miter
+LibGui.UIStroke_6.Thickness = 2.9000000953674316
+LibGui.UIStroke_6.Transparency = 0
+LibGui.UIStroke_6.Enabled = true
+
+LibGui.ToggleText.Name = "ToggleText"
+LibGui.ToggleText.ZIndex = 1
+LibGui.ToggleText.Position = UDim2.new(0, 0, 0.408602148, 0)
+LibGui.ToggleText.Size = UDim2.new(0, 108, 0, 16)
+LibGui.ToggleText.BackgroundColor3 = Color3.fromRGB(255,255,255)
+LibGui.ToggleText.BackgroundTransparency = 1
+LibGui.ToggleText.Text = "CT"
+LibGui.ToggleText.TextScaled = false
+LibGui.ToggleText.TextSize = 14
+LibGui.ToggleText.Font = Enum.Font.FredokaOne
+LibGui.ToggleText.TextColor3 = Color3.fromRGB(255,255,255)
+LibGui.ToggleText.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+LibGui.ToggleText.TextStrokeTransparency = 1
+LibGui.ToggleText.TextWrapped = false
+LibGui.ToggleText.TextXAlignment = Enum.TextXAlignment.Center
+LibGui.ToggleText.TextYAlignment = Enum.TextYAlignment.Center
+LibGui.ToggleText.TextTransparency = 0
+LibGui.ToggleText.Visible = true
+LibGui.ToggleText.AnchorPoint = Vector2.new(0, 0)
+LibGui.ToggleText.ClipsDescendants = false
+
+LibGui.Off.Name = "Off"
+LibGui.Off.ZIndex = 1
+LibGui.Off.Position = UDim2.new(1, 0, 0, 0)
+LibGui.Off.Size = UDim2.new(0, 16, 0, 16)
+LibGui.Off.BackgroundColor3 = Color3.fromRGB(0,0,0)
+LibGui.Off.BackgroundTransparency = 1
+LibGui.Off.Text = "X"
+LibGui.Off.TextScaled = true
+LibGui.Off.TextSize = 14
+LibGui.Off.Font = Enum.Font.FredokaOne
+LibGui.Off.TextColor3 = Color3.fromRGB(255,0,0)
+LibGui.Off.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+LibGui.Off.TextStrokeTransparency = 1
+LibGui.Off.TextWrapped = true
+LibGui.Off.TextXAlignment = Enum.TextXAlignment.Center
+LibGui.Off.TextYAlignment = Enum.TextYAlignment.Center
+LibGui.Off.TextTransparency = 0
+LibGui.Off.Visible = true
+LibGui.Off.AnchorPoint = Vector2.new(0, 0)
+LibGui.Off.ClipsDescendants = false
+
+LibGui.UIStroke_7.Name = "UIStroke"
+LibGui.UIStroke_7.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+LibGui.UIStroke_7.Color = Color3.fromRGB(30,30,30)
+LibGui.UIStroke_7.LineJoinMode = Enum.LineJoinMode.Round
+LibGui.UIStroke_7.Thickness = 2.9000000953674316
+LibGui.UIStroke_7.Transparency = 0
+LibGui.UIStroke_7.Enabled = true
+
+LibGui.On.Name = "On"
+LibGui.On.ZIndex = 1
+LibGui.On.Position = UDim2.new(1, 0, 0, 0)
+LibGui.On.Size = UDim2.new(0, 16, 0, 16)
+LibGui.On.BackgroundColor3 = Color3.fromRGB(0,0,0)
+LibGui.On.BackgroundTransparency = 1
+LibGui.On.Text = "/"
+LibGui.On.TextScaled = true
+LibGui.On.TextSize = 14
+LibGui.On.Font = Enum.Font.FredokaOne
+LibGui.On.TextColor3 = Color3.fromRGB(55,255,0)
+LibGui.On.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+LibGui.On.TextStrokeTransparency = 1
+LibGui.On.TextWrapped = true
+LibGui.On.TextXAlignment = Enum.TextXAlignment.Center
+LibGui.On.TextYAlignment = Enum.TextYAlignment.Center
+LibGui.On.TextTransparency = 0
+LibGui.On.Visible = true
+LibGui.On.AnchorPoint = Vector2.new(0, 0)
+LibGui.On.ClipsDescendants = false
+
+LibGui.UIStroke_8.Name = "UIStroke"
+LibGui.UIStroke_8.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+LibGui.UIStroke_8.Color = Color3.fromRGB(30,30,30)
+LibGui.UIStroke_8.LineJoinMode = Enum.LineJoinMode.Round
+LibGui.UIStroke_8.Thickness = 2.9000000953674316
+LibGui.UIStroke_8.Transparency = 0
+LibGui.UIStroke_8.Enabled = true
+
+LibGui.UIStroke_9.Name = "UIStroke"
+LibGui.UIStroke_9.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+LibGui.UIStroke_9.Color = Color3.fromRGB(0,0,0)
+LibGui.UIStroke_9.LineJoinMode = Enum.LineJoinMode.Miter
+LibGui.UIStroke_9.Thickness = 2.9000000953674316
+LibGui.UIStroke_9.Transparency = 0
+LibGui.UIStroke_9.Enabled = true
+
+LibGui.SliderText.Name = "SliderText"
+LibGui.SliderText.ZIndex = 1
+LibGui.SliderText.Position = UDim2.new(0, 0, 0.580645144, 0)
+LibGui.SliderText.Size = UDim2.new(0, 131, 0, 16)
+LibGui.SliderText.BackgroundColor3 = Color3.fromRGB(255,255,255)
+LibGui.SliderText.BackgroundTransparency = 1
+LibGui.SliderText.Text = "Slider"
+LibGui.SliderText.TextScaled = false
+LibGui.SliderText.TextSize = 14
+LibGui.SliderText.Font = Enum.Font.FredokaOne
+LibGui.SliderText.TextColor3 = Color3.fromRGB(255,255,255)
+LibGui.SliderText.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+LibGui.SliderText.TextStrokeTransparency = 1
+LibGui.SliderText.TextWrapped = false
+LibGui.SliderText.TextXAlignment = Enum.TextXAlignment.Center
+LibGui.SliderText.TextYAlignment = Enum.TextYAlignment.Center
+LibGui.SliderText.TextTransparency = 0
+LibGui.SliderText.Visible = true
+LibGui.SliderText.AnchorPoint = Vector2.new(0, 0)
+LibGui.SliderText.ClipsDescendants = false
+
+LibGui.UIStroke_10.Name = "UIStroke"
+LibGui.UIStroke_10.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+LibGui.UIStroke_10.Color = Color3.fromRGB(0,0,0)
+LibGui.UIStroke_10.LineJoinMode = Enum.LineJoinMode.Miter
+LibGui.UIStroke_10.Thickness = 2.9000000953674316
+LibGui.UIStroke_10.Transparency = 0
+LibGui.UIStroke_10.Enabled = true
+
+LibGui.Bask.Name = "Bask"
+LibGui.Bask.ZIndex = 1
+LibGui.Bask.Position = UDim2.new(0, 0, 1, 0)
+LibGui.Bask.Size = UDim2.new(0, 131, 0, 10)
+LibGui.Bask.BackgroundColor3 = Color3.fromRGB(25,25,25)
+LibGui.Bask.BackgroundTransparency = 0
+LibGui.Bask.Visible = true
+LibGui.Bask.AnchorPoint = Vector2.new(0, 0)
+LibGui.Bask.ClipsDescendants = false
+LibGui.Bask.BorderSizePixel = 0
+
+LibGui.Slider.Name = "Slider"
+LibGui.Slider.ZIndex = 1
+LibGui.Slider.Position = UDim2.new(0, 0, 1, 0)
+LibGui.Slider.Size = UDim2.new(0, 55, 0, 10)
+LibGui.Slider.BackgroundColor3 = Color3.fromRGB(255,0,0)
+LibGui.Slider.BackgroundTransparency = 0
+LibGui.Slider.Visible = true
+LibGui.Slider.AnchorPoint = Vector2.new(0, 0)
+LibGui.Slider.ClipsDescendants = false
+LibGui.Slider.BorderSizePixel = 0
+
+LibGui.C.Name = "C"
+LibGui.C.ZIndex = 1
+LibGui.C.Position = UDim2.new(0, 0, 0, 0)
+LibGui.C.Size = UDim2.new(1, 0, 0, 34)
+LibGui.C.BackgroundColor3 = Color3.fromRGB(9,9,9)
+LibGui.C.BackgroundTransparency = 0
+LibGui.C.Visible = true
+LibGui.C.AnchorPoint = Vector2.new(0, 0)
+LibGui.C.ClipsDescendants = false
+LibGui.C.BorderSizePixel = 0
+LibGui.C.CanvasSize = UDim2.new(0, 0, 0, 0)
+LibGui.C.AutomaticCanvasSize = Enum.AutomaticSize.X
+LibGui.C.ScrollingDirection = Enum.ScrollingDirection.X
+LibGui.C.ScrollBarThickness = 2
+LibGui.C.ScrollBarImageColor3 = Color3.fromRGB(255,0,0)
+
+LibGui.UIStroke_11.Name = "UIStroke"
+LibGui.UIStroke_11.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+LibGui.UIStroke_11.Color = Color3.fromRGB(0,0,0)
+LibGui.UIStroke_11.LineJoinMode = Enum.LineJoinMode.Miter
+LibGui.UIStroke_11.Thickness = 2.9000000953674316
+LibGui.UIStroke_11.Transparency = 0
+LibGui.UIStroke_11.Enabled = true
+
+LibGui.Tab.Name = "Tab"
+LibGui.Tab.ZIndex = 1
+LibGui.Tab.Position = UDim2.new(0, 0, 0, 0)
+LibGui.Tab.Size = UDim2.new(0, 87, 0, 34)
+LibGui.Tab.BackgroundColor3 = Color3.fromRGB(255,255,255)
+LibGui.Tab.BackgroundTransparency = 1
+LibGui.Tab.Text = "Tab"
+LibGui.Tab.TextScaled = true
+LibGui.Tab.TextSize = 14
+LibGui.Tab.Font = Enum.Font.FredokaOne
+LibGui.Tab.TextColor3 = Color3.fromRGB(255,255,255)
+LibGui.Tab.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+LibGui.Tab.TextStrokeTransparency = 1
+LibGui.Tab.TextWrapped = true
+LibGui.Tab.TextXAlignment = Enum.TextXAlignment.Center
+LibGui.Tab.TextYAlignment = Enum.TextYAlignment.Center
+LibGui.Tab.TextTransparency = 0
+LibGui.Tab.Visible = true
+LibGui.Tab.AnchorPoint = Vector2.new(0, 0)
+LibGui.Tab.ClipsDescendants = false
+
+LibGui.UIGridLayout.Name = "UIGridLayout"
+LibGui.UIGridLayout.FillDirection = Enum.FillDirection.Horizontal
+LibGui.UIGridLayout.Padding = UDim.new(0, 4)
+LibGui.UIGridLayout.SortOrder = Enum.SortOrder.LayoutOrder
+LibGui.UIGridLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
+LibGui.UIGridLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+
+LibGui.Tab1.Name = "Tab1"
+LibGui.Tab1.ZIndex = 1
+LibGui.Tab1.Position = UDim2.new(0, 0, 0, 0)
+LibGui.Tab1.Size = UDim2.new(0, 87, 0, 34)
+LibGui.Tab1.BackgroundColor3 = Color3.fromRGB(255,255,255)
+LibGui.Tab1.BackgroundTransparency = 1
+LibGui.Tab1.Text = "Tab1"
+LibGui.Tab1.TextScaled = true
+LibGui.Tab1.TextSize = 14
+LibGui.Tab1.Font = Enum.Font.FredokaOne
+LibGui.Tab1.TextColor3 = Color3.fromRGB(255,255,255)
+LibGui.Tab1.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+LibGui.Tab1.TextStrokeTransparency = 1
+LibGui.Tab1.TextWrapped = true
+LibGui.Tab1.TextXAlignment = Enum.TextXAlignment.Center
+LibGui.Tab1.TextYAlignment = Enum.TextYAlignment.Center
+LibGui.Tab1.TextTransparency = 0
+LibGui.Tab1.Visible = true
+LibGui.Tab1.AnchorPoint = Vector2.new(0, 0)
+LibGui.Tab1.ClipsDescendants = false
+
+-- ===== LIBRARY API =====
+-- Библиотека для лёгкого создания вкладок, секций и элементов
+
+local UserInputService = game:GetService("UserInputService")
+
+-- Стиль
 local THEME = {
 	Background = Color3.fromRGB(13, 13, 13),
-	Header = Color3.fromRGB(9, 9, 9),
-	Section = Color3.fromRGB(7, 7, 7),
+	Section = Color3.fromRGB(9, 9, 9),
+	Card = Color3.fromRGB(7, 7, 7),
 	Element = Color3.fromRGB(12, 12, 12),
-	ElementSelected = Color3.fromRGB(24, 24, 24),
 	Text = Color3.fromRGB(255, 255, 255),
-	TextDim = Color3.fromRGB(120, 120, 120),
+	TextDim = Color3.fromRGB(100, 100, 100),
 	Accent = Color3.fromRGB(255, 0, 0),
-	Success = Color3.fromRGB(55, 255, 0),
 	Stroke = Color3.fromRGB(0, 0, 0),
 	StrokeLight = Color3.fromRGB(30, 30, 30),
 	Font = Enum.Font.FredokaOne,
 }
 
-local function create(className, properties)
-	local object = Instance.new(className)
+-- Удаляем демонстрационную CT-карточку целиком, чтобы она не занимала память.
+LibGui.CT:Destroy()
+LibGui.Tab:Destroy()
+LibGui.Tab1:Destroy()
 
-	for property, value in pairs(properties or {}) do
-		if property ~= "Parent" then
-			object[property] = value
-		end
-	end
+-- Включаем ClipsDescendants чтобы контент не вылезал
+LibGui.V.ClipsDescendants = true
 
-	if properties and properties.Parent then
-		object.Parent = properties.Parent
-	end
+-- ===== ИСПРАВЛЕНИЕ БАГА: переносим контейнер вкладок (C) внутрь V и задаём ZIndex =====
+LibGui.C.Parent = LibGui.V
+LibGui.C.Position = UDim2.new(0, 0, 0, 0)
+LibGui.C.Size = UDim2.new(1, 0, 0, 34)
+LibGui.C.ZIndex = 10
+LibGui.C.ClipsDescendants = true
 
-	return object
-end
-
+-- Хелпер: создать UIStroke
 local function makeStroke(parent, color, thickness)
-	return create("UIStroke", {
-		Color = color or THEME.Stroke,
-		Thickness = thickness or 1,
-		ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-		Parent = parent,
-	})
+	local s = Instance.new("UIStroke")
+	s.Color = color or THEME.Stroke
+	s.Thickness = thickness or 2.9
+	s.Parent = parent
+	return s
 end
 
-local function safeCall(callback, ...)
-	if not callback then
-		return
-	end
-
-	local success, message = pcall(callback, ...)
-	if not success then
-		warn("[OurLib] Callback error: " .. tostring(message))
-	end
-end
-
-local ScreenGui = create("ScreenGui", {
-	Name = "OurLibGui",
-	ResetOnSpawn = false,
-	IgnoreGuiInset = false,
-	DisplayOrder = 1000,
-	ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-	Parent = PlayerGui,
-})
-
-local Main = create("Frame", {
-	Name = "Main",
-	AnchorPoint = Vector2.new(0.5, 0.5),
-	Position = UDim2.fromScale(0.5, 0.5),
-	Size = UDim2.fromOffset(430, 500),
-	BackgroundColor3 = THEME.Background,
-	BorderSizePixel = 0,
-	ClipsDescendants = true,
-	Active = true,
-	Parent = ScreenGui,
-})
-makeStroke(Main, THEME.Stroke, 2)
-
-local InterfaceScale = create("UIScale", {
-	Name = "InterfaceScale",
-	Scale = 1,
-	Parent = Main,
-})
-
-local Header = create("Frame", {
-	Name = "Header",
-	Size = UDim2.new(1, 0, 0, 38),
-	BackgroundColor3 = THEME.Header,
-	BorderSizePixel = 0,
-	Active = true,
-	ZIndex = 20,
-	Parent = Main,
-})
-
-local Title = create("TextLabel", {
-	Name = "Title",
-	Position = UDim2.fromOffset(10, 0),
-	Size = UDim2.new(1, -92, 1, 0),
-	BackgroundTransparency = 1,
-	Text = "Advanced Script | RightShift",
-	Font = THEME.Font,
-	TextSize = 16,
-	TextColor3 = THEME.Text,
-	TextXAlignment = Enum.TextXAlignment.Left,
-	TextTruncate = Enum.TextTruncate.AtEnd,
-	ZIndex = 21,
-	Parent = Header,
-})
-
-local MinimizeButton = create("TextButton", {
-	Name = "Minimize",
-	Position = UDim2.new(1, -76, 0, 0),
-	Size = UDim2.fromOffset(38, 38),
-	BackgroundTransparency = 1,
-	Text = "−",
-	Font = THEME.Font,
-	TextSize = 22,
-	TextColor3 = Color3.fromRGB(255, 225, 0),
-	ZIndex = 22,
-	Parent = Header,
-})
-
-local CloseButton = create("TextButton", {
-	Name = "Close",
-	Position = UDim2.new(1, -38, 0, 0),
-	Size = UDim2.fromOffset(38, 38),
-	BackgroundTransparency = 1,
-	Text = "X",
-	Font = THEME.Font,
-	TextSize = 17,
-	TextColor3 = THEME.Accent,
-	ZIndex = 22,
-	Parent = Header,
-})
-
-local Body = create("Frame", {
-	Name = "Body",
-	Position = UDim2.fromOffset(0, 38),
-	Size = UDim2.new(1, 0, 1, -38),
-	BackgroundTransparency = 1,
-	ClipsDescendants = true,
-	Parent = Main,
-})
-
-local TabBar = create("ScrollingFrame", {
-	Name = "TabBar",
-	Size = UDim2.new(1, 0, 0, 38),
-	BackgroundColor3 = THEME.Header,
-	BorderSizePixel = 0,
-	CanvasSize = UDim2.fromOffset(0, 0),
-	AutomaticCanvasSize = Enum.AutomaticSize.X,
-	ScrollingDirection = Enum.ScrollingDirection.X,
-	ScrollBarThickness = 2,
-	ScrollBarImageColor3 = THEME.Accent,
-	ClipsDescendants = true,
-	ZIndex = 10,
-	Parent = Body,
-})
-
-create("UIPadding", {
-	PaddingLeft = UDim.new(0, 6),
-	PaddingRight = UDim.new(0, 6),
-	Parent = TabBar,
-})
-
-create("UIListLayout", {
-	FillDirection = Enum.FillDirection.Horizontal,
-	HorizontalAlignment = Enum.HorizontalAlignment.Left,
-	VerticalAlignment = Enum.VerticalAlignment.Center,
-	SortOrder = Enum.SortOrder.LayoutOrder,
-	Padding = UDim.new(0, 4),
-	Parent = TabBar,
-})
-
-local ResizeHandle = create("TextButton", {
-	Name = "ResizeHandle",
-	AnchorPoint = Vector2.new(1, 1),
-	Position = UDim2.new(1, 0, 1, 0),
-	Size = UDim2.fromOffset(18, 18),
-	BackgroundColor3 = Color3.fromRGB(20, 20, 20),
-	BorderSizePixel = 0,
-	Text = "◢",
-	Font = Enum.Font.Code,
-	TextSize = 14,
-	TextColor3 = Color3.fromRGB(110, 110, 110),
-	AutoButtonColor = false,
-	ZIndex = 30,
-	Parent = Main,
-})
-makeStroke(ResizeHandle, Color3.fromRGB(60, 60, 60), 1)
-
-local Library = {}
-local libraryConnections = {}
+-- Система вкладок
 local tabsData = {}
+local activeTabIndex = 1
+local activeSlider = nil
 local keybinds = {}
 
-local activeTabIndex = 0
-local activeSlider = nil
-local activeDropdown = nil
-local destroyed = false
-
-local dragging = false
-local dragStart = nil
-local startPosition = nil
-
-local resizing = false
-local resizeStart = nil
-local startSize = nil
-
-local minimized = false
-local sizeBeforeMinimize = Main.Size
-
-local MIN_WIDTH = 320
-local MIN_HEIGHT = 220
-local menuToggleKey = Enum.KeyCode.RightShift
-
-local function connect(signal, callback)
-	local connection = signal:Connect(callback)
-	table.insert(libraryConnections, connection)
-	return connection
-end
-
 local function selectTab(index)
-	if not tabsData[index] then
-		return
-	end
-
 	activeTabIndex = index
-
-	for tabIndex, tabData in ipairs(tabsData) do
-		local selected = tabIndex == index
-		tabData.content.Visible = selected
-		tabData.button.TextColor3 = selected and THEME.Text or THEME.TextDim
-		tabData.button.BackgroundTransparency = selected and 0 or 1
-		tabData.indicator.Visible = selected
+	for i, data in ipairs(tabsData) do
+		if i == index then
+			data.button.TextColor3 = THEME.Text
+			data.button.BackgroundTransparency = 0
+			data.button.BackgroundColor3 = THEME.Element
+			data.content.Visible = true
+		else
+			data.button.TextColor3 = THEME.TextDim
+			data.button.BackgroundTransparency = 1
+			data.content.Visible = false
+		end
 	end
 end
 
-local function closeActiveDropdown()
-	if activeDropdown then
-		activeDropdown:Destroy()
-		activeDropdown = nil
-	end
-end
-
-connect(UserInputService.InputBegan, function(input, gameProcessed)
+-- Один общий набор обработчиков для всех слайдеров и биндов.
+-- Благодаря этому большое количество элементов не создаёт сотни Connect.
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
 	for _, binding in ipairs(keybinds) do
 		if binding.listening and input.UserInputType == Enum.UserInputType.Keyboard then
 			if input.KeyCode == Enum.KeyCode.Escape then
@@ -277,11 +563,6 @@ connect(UserInputService.InputBegan, function(input, gameProcessed)
 			else
 				binding.key = input.KeyCode
 				binding.button.Text = input.KeyCode.Name
-
-				if binding.isMenuKey then
-					menuToggleKey = input.KeyCode
-					Title.Text = "Advanced Script | " .. input.KeyCode.Name
-				end
 			end
 
 			binding.button.TextColor3 = THEME.Text
@@ -290,8 +571,8 @@ connect(UserInputService.InputBegan, function(input, gameProcessed)
 		end
 	end
 
-	if not gameProcessed and input.KeyCode == menuToggleKey then
-		ScreenGui.Enabled = not ScreenGui.Enabled
+	if not gameProcessed and input.KeyCode == Enum.KeyCode.RightShift then
+		LibGui.LibGui.Enabled = not LibGui.LibGui.Enabled
 		return
 	end
 
@@ -300,60 +581,32 @@ connect(UserInputService.InputBegan, function(input, gameProcessed)
 	end
 
 	for _, binding in ipairs(keybinds) do
-		if not binding.isMenuKey
-			and binding.key ~= Enum.KeyCode.Unknown
-			and input.KeyCode == binding.key then
+		if binding.key ~= Enum.KeyCode.Unknown and input.KeyCode == binding.key then
 			if binding.toggleMode then
 				binding.active = not binding.active
 				binding.button.BackgroundColor3 = binding.active
 					and Color3.fromRGB(20, 60, 20)
 					or Color3.fromRGB(40, 40, 40)
-				safeCall(binding.callback, binding.active)
+				if binding.callback then binding.callback(binding.active) end
 			else
-				safeCall(binding.callback, true)
+				if binding.callback then binding.callback(true) end
 			end
 		end
 	end
 end)
 
-connect(UserInputService.InputChanged, function(input)
-	local pointerMove = input.UserInputType == Enum.UserInputType.MouseMovement
+UserInputService.InputChanged:Connect(function(input)
+	if activeSlider and (
+		input.UserInputType == Enum.UserInputType.MouseMovement
 		or input.UserInputType == Enum.UserInputType.Touch
-
-	if not pointerMove then
-		return
-	end
-
-	if dragging and dragStart and startPosition then
-		local delta = input.Position - dragStart
-		Main.Position = UDim2.new(
-			startPosition.X.Scale,
-			startPosition.X.Offset + delta.X,
-			startPosition.Y.Scale,
-			startPosition.Y.Offset + delta.Y
-		)
-	end
-
-	if resizing and resizeStart and startSize then
-		local delta = input.Position - resizeStart
-		local viewportSize = Workspace.CurrentCamera and Workspace.CurrentCamera.ViewportSize
-		local maxWidth = viewportSize and math.max(MIN_WIDTH, viewportSize.X - 20) or 1200
-		local maxHeight = viewportSize and math.max(MIN_HEIGHT, viewportSize.Y - 20) or 900
-		local width = math.clamp(startSize.X.Offset + delta.X, MIN_WIDTH, maxWidth)
-		local height = math.clamp(startSize.Y.Offset + delta.Y, MIN_HEIGHT, maxHeight)
-		Main.Size = UDim2.fromOffset(width, height)
-	end
-
-	if activeSlider then
+	) then
 		activeSlider.setFromX(input.Position.X)
 	end
 end)
 
-connect(UserInputService.InputEnded, function(input, gameProcessed)
+UserInputService.InputEnded:Connect(function(input, gameProcessed)
 	if input.UserInputType == Enum.UserInputType.MouseButton1
 		or input.UserInputType == Enum.UserInputType.Touch then
-		dragging = false
-		resizing = false
 		activeSlider = nil
 	end
 
@@ -362,621 +615,467 @@ connect(UserInputService.InputEnded, function(input, gameProcessed)
 	end
 
 	for _, binding in ipairs(keybinds) do
-		if not binding.isMenuKey
-			and not binding.toggleMode
+		if not binding.toggleMode
 			and binding.key ~= Enum.KeyCode.Unknown
 			and input.KeyCode == binding.key then
-			safeCall(binding.callback, false)
+			if binding.callback then binding.callback(false) end
 		end
 	end
 end)
 
-connect(Header.InputBegan, function(input)
-	if minimized then
-		return
-	end
-
-	if input.UserInputType == Enum.UserInputType.MouseButton1
-		or input.UserInputType == Enum.UserInputType.Touch then
-		dragging = true
-		dragStart = input.Position
-		startPosition = Main.Position
-	end
-end)
-
-connect(ResizeHandle.InputBegan, function(input)
-	if minimized then
-		return
-	end
-
-	if input.UserInputType == Enum.UserInputType.MouseButton1
-		or input.UserInputType == Enum.UserInputType.Touch then
-		resizing = true
-		resizeStart = input.Position
-		startSize = Main.Size
-	end
-end)
-
-connect(CloseButton.MouseButton1Click, function()
-	ScreenGui.Enabled = false
-end)
-
-connect(MinimizeButton.MouseButton1Click, function()
-	minimized = not minimized
-
-	if minimized then
-		sizeBeforeMinimize = Main.Size
-		Body.Visible = false
-		ResizeHandle.Visible = false
-		Main.Size = UDim2.fromOffset(math.max(MIN_WIDTH, Main.AbsoluteSize.X), 38)
-		MinimizeButton.Text = "+"
-	else
-		Main.Size = sizeBeforeMinimize
-		Body.Visible = true
-		ResizeHandle.Visible = true
-		MinimizeButton.Text = "−"
-	end
-end)
-
-function Library:SetTitle(text)
-	Title.Text = tostring(text)
-end
-
-function Library:SetVisible(visible)
-	ScreenGui.Enabled = visible == true
-end
-
-function Library:Toggle()
-	ScreenGui.Enabled = not ScreenGui.Enabled
-end
-
-function Library:SetMenuKey(key)
-	menuToggleKey = key or Enum.KeyCode.RightShift
-	Title.Text = "Advanced Script | " .. menuToggleKey.Name
-end
-
-function Library:SetScale(scale)
-	InterfaceScale.Scale = math.clamp(tonumber(scale) or 1, 0.75, 1.25)
-end
-
-function Library:ResetWindow()
-	closeActiveDropdown()
-	minimized = false
-	Body.Visible = true
-	ResizeHandle.Visible = true
-	MinimizeButton.Text = "−"
-	Main.AnchorPoint = Vector2.new(0.5, 0.5)
-	Main.Position = UDim2.fromScale(0.5, 0.5)
-	Main.Size = UDim2.fromOffset(430, 500)
-end
-
-function Library:SelectTab(index)
-	selectTab(index)
-end
-
-function Library:Destroy()
-	if destroyed then
-		return
-	end
-
-	destroyed = true
-	closeActiveDropdown()
-
-	for _, connection in ipairs(libraryConnections) do
-		if connection.Connected then
-			connection:Disconnect()
-		end
-	end
-
-	table.clear(libraryConnections)
-	ScreenGui:Destroy()
-end
+-- ===== ОБЪЕКТ БИБЛИОТЕКИ =====
+local Library = {}
 
 function Library:CreateTab(name)
-	local tabName = tostring(name)
-	local tabIndex = #tabsData + 1
-	local buttonWidth = math.clamp(#tabName * 9 + 28, 82, 155)
+	-- Кнопка вкладки
+	local tabBtn = Instance.new("TextButton")
+	tabBtn.Text = name
+	tabBtn.Font = THEME.Font
+	tabBtn.TextScaled = false
+	tabBtn.TextSize = 14
+	tabBtn.TextColor3 = THEME.Text
+	tabBtn.Size = UDim2.new(0, math.clamp(#tostring(name) * 9 + 28, 80, 150), 0, 34)
+	tabBtn.LayoutOrder = #tabsData + 1
+	tabBtn.ZIndex = 11
+	tabBtn.AutoButtonColor = false
+	tabBtn.BackgroundTransparency = 1
+	tabBtn.Parent = LibGui.C
 
-	local TabButton = create("TextButton", {
-		Name = "Tab_" .. tabName,
-		Size = UDim2.fromOffset(buttonWidth, 34),
-		BackgroundColor3 = THEME.ElementSelected,
-		BackgroundTransparency = 1,
-		BorderSizePixel = 0,
-		Text = tabName,
-		Font = THEME.Font,
-		TextSize = 14,
-		TextColor3 = THEME.TextDim,
-		TextTruncate = Enum.TextTruncate.AtEnd,
-		LayoutOrder = tabIndex,
-		AutoButtonColor = false,
-		ZIndex = 11,
-		Parent = TabBar,
-	})
+	-- Контент вкладки (ScrollingFrame) - теперь с учётом высоты вкладок (34px)
+	local content = Instance.new("ScrollingFrame")
+	content.Size = UDim2.new(1, 0, 1, -34)   -- занимает всю V, кроме области вкладок
+	content.Position = UDim2.new(0, 0, 0, 34) -- сдвиг вниз на высоту вкладок
+	content.BackgroundTransparency = 1
+	content.BorderSizePixel = 0
+	content.ScrollBarThickness = 4
+	content.ScrollBarImageColor3 = THEME.Accent
+	content.CanvasSize = UDim2.new(0, 0, 0, 0)
+	content.AutomaticCanvasSize = Enum.AutomaticSize.Y
+	content.Visible = false
+	content.ZIndex = 2
+	content.Parent = LibGui.V
 
-	local Indicator = create("Frame", {
-		Name = "Indicator",
-		AnchorPoint = Vector2.new(0, 1),
-		Position = UDim2.new(0, 5, 1, 0),
-		Size = UDim2.new(1, -10, 0, 2),
-		BackgroundColor3 = THEME.Accent,
-		BorderSizePixel = 0,
-		Visible = false,
-		ZIndex = 12,
-		Parent = TabButton,
-	})
+	local layout = Instance.new("UIListLayout")
+	layout.Padding = UDim.new(0, 8)
+	layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	layout.Parent = content
 
-	local Content = create("ScrollingFrame", {
-		Name = "Content_" .. tabName,
-		Position = UDim2.fromOffset(0, 38),
-		Size = UDim2.new(1, 0, 1, -38),
-		BackgroundTransparency = 1,
-		BorderSizePixel = 0,
-		CanvasSize = UDim2.fromOffset(0, 0),
-		AutomaticCanvasSize = Enum.AutomaticSize.Y,
-		ScrollingDirection = Enum.ScrollingDirection.Y,
-		ScrollBarThickness = 4,
-		ScrollBarImageColor3 = THEME.Accent,
-		Visible = false,
-		ZIndex = 2,
-		Parent = Body,
-	})
-
-	create("UIPadding", {
-		PaddingTop = UDim.new(0, 10),
-		PaddingBottom = UDim.new(0, 10),
-		PaddingLeft = UDim.new(0, 10),
-		PaddingRight = UDim.new(0, 10),
-		Parent = Content,
-	})
-
-	create("UIListLayout", {
-		Padding = UDim.new(0, 8),
-		HorizontalAlignment = Enum.HorizontalAlignment.Center,
-		SortOrder = Enum.SortOrder.LayoutOrder,
-		Parent = Content,
-	})
-
-	local tabData = {
-		button = TabButton,
-		indicator = Indicator,
-		content = Content,
-		name = tabName,
-	}
+	local tabData = { button = tabBtn, content = content, name = name }
 	table.insert(tabsData, tabData)
+	local tabIndex = #tabsData
 
-	connect(TabButton.MouseButton1Click, function()
-		closeActiveDropdown()
+	tabBtn.MouseButton1Click:Connect(function()
 		selectTab(tabIndex)
 	end)
 
-	if activeTabIndex == 0 then
+	if tabIndex == 1 then
 		selectTab(1)
 	end
 
+	-- ===== ОБЪЕКТ ВКЛАДКИ =====
 	local Tab = {}
 
 	function Tab:CreateSection(sectionName)
-		local SectionFrame = create("Frame", {
-			Name = "Section_" .. tostring(sectionName),
-			Size = UDim2.new(1, -20, 0, 0),
-			AutomaticSize = Enum.AutomaticSize.Y,
-			BackgroundColor3 = THEME.Section,
-			BorderSizePixel = 0,
-			ZIndex = 3,
-			Parent = Content,
-		})
-		makeStroke(SectionFrame, THEME.Stroke, 1)
+		local section = Instance.new("Frame")
+		section.Size = UDim2.new(0, 330, 0, 0)
+		section.BackgroundColor3 = THEME.Card
+		section.BorderSizePixel = 0
+		section.AutomaticSize = Enum.AutomaticSize.Y
+		section.Parent = content
+		makeStroke(section)
 
-		create("UIPadding", {
-			PaddingTop = UDim.new(0, 5),
-			PaddingBottom = UDim.new(0, 5),
-			PaddingLeft = UDim.new(0, 5),
-			PaddingRight = UDim.new(0, 5),
-			Parent = SectionFrame,
-		})
+		local sLayout = Instance.new("UIListLayout")
+		sLayout.Padding = UDim.new(0, 4)
+		sLayout.Parent = section
 
-		create("UIListLayout", {
-			Padding = UDim.new(0, 5),
-			SortOrder = Enum.SortOrder.LayoutOrder,
-			Parent = SectionFrame,
-		})
+		local padding = Instance.new("UIPadding")
+		padding.PaddingTop = UDim.new(0, 4)
+		padding.PaddingBottom = UDim.new(0, 4)
+		padding.PaddingLeft = UDim.new(0, 4)
+		padding.PaddingRight = UDim.new(0, 4)
+		padding.Parent = section
 
-		create("TextLabel", {
-			Name = "SectionTitle",
-			Size = UDim2.new(1, 0, 0, 24),
-			BackgroundTransparency = 1,
-			Text = tostring(sectionName),
-			Font = THEME.Font,
-			TextSize = 14,
-			TextColor3 = THEME.Text,
-			ZIndex = 4,
-			Parent = SectionFrame,
-		})
+		-- Заголовок секции
+		local title = Instance.new("TextLabel")
+		title.Size = UDim2.new(1, 0, 0, 24)
+		title.BackgroundTransparency = 1
+		title.Text = sectionName
+		title.Font = THEME.Font
+		title.TextSize = 14
+		title.TextColor3 = THEME.Text
+		title.TextXAlignment = Enum.TextXAlignment.Center
+		title.Parent = section
 
+		-- ===== ОБЪЕКТ СЕКЦИИ =====
 		local Section = {}
 
-		local function createRow(height)
-			local Row = create("Frame", {
-				Size = UDim2.new(1, 0, 0, height or 28),
-				BackgroundColor3 = THEME.Element,
-				BorderSizePixel = 0,
-				ZIndex = 4,
-				Parent = SectionFrame,
-			})
-			makeStroke(Row, THEME.StrokeLight, 1)
-			return Row
-		end
-
-		local function createRowLabel(row, text, rightSpace)
-			return create("TextLabel", {
-				Size = UDim2.new(1, -(rightSpace or 0), 1, 0),
-				Position = UDim2.fromOffset(6, 0),
-				BackgroundTransparency = 1,
-				Text = tostring(text),
-				Font = THEME.Font,
-				TextSize = 14,
-				TextColor3 = THEME.Text,
-				TextXAlignment = Enum.TextXAlignment.Left,
-				TextTruncate = Enum.TextTruncate.AtEnd,
-				ZIndex = 5,
-				Parent = row,
-			})
-		end
-
 		function Section:CreateButton(text, callback)
-			local Button = create("TextButton", {
-				Size = UDim2.new(1, 0, 0, 28),
-				BackgroundColor3 = THEME.Element,
-				BorderSizePixel = 0,
-				Text = tostring(text),
-				Font = THEME.Font,
-				TextSize = 14,
-				TextColor3 = THEME.Text,
-				ZIndex = 4,
-				Parent = SectionFrame,
-			})
-			makeStroke(Button, THEME.StrokeLight, 1)
+			local btn = Instance.new("TextButton")
+			btn.Size = UDim2.new(1, 0, 0, 28)
+			btn.BackgroundColor3 = THEME.Element
+			btn.BorderSizePixel = 0
+			btn.Text = text
+			btn.Font = THEME.Font
+			btn.TextSize = 14
+			btn.TextColor3 = THEME.Text
+			btn.Parent = section
+			makeStroke(btn, THEME.StrokeLight)
 
-			connect(Button.MouseButton1Click, function()
-				safeCall(callback)
+			btn.MouseButton1Click:Connect(function()
+				if callback then callback() end
 			end)
-
-			return Button
+			return btn
 		end
 
 		function Section:CreateLabel(name, text)
-			local fullText = text == nil
-				and tostring(name)
-				or tostring(name) .. ": " .. tostring(text)
-
-			local Label = create("TextLabel", {
-				Size = UDim2.new(1, 0, 0, 24),
-				BackgroundTransparency = 1,
-				Text = fullText,
-				Font = THEME.Font,
-				TextSize = 14,
-				TextColor3 = THEME.Text,
-				TextXAlignment = Enum.TextXAlignment.Left,
-				TextTruncate = Enum.TextTruncate.AtEnd,
-				ZIndex = 4,
-				Parent = SectionFrame,
-			})
-
-			return {
-				set = function(newText)
-					Label.Text = tostring(newText)
-				end,
-				instance = Label,
-			}
+			local label = Instance.new("TextLabel")
+			label.Size = UDim2.new(1, 0, 0, 24)
+			label.BackgroundTransparency = 1
+			label.Text = name .. ": " .. text
+			label.Font = THEME.Font
+			label.TextSize = 14
+			label.TextColor3 = THEME.Text
+			label.TextXAlignment = Enum.TextXAlignment.Left
+			label.Parent = section
+			return label
 		end
 
 		function Section:CreateToggle(name, callback)
 			local state = false
-			local Row = createRow(28)
-			createRowLabel(Row, name, 42)
 
-			local ToggleButton = create("TextButton", {
-				Size = UDim2.fromOffset(28, 22),
-				AnchorPoint = Vector2.new(1, 0.5),
-				Position = UDim2.new(1, -4, 0.5, 0),
-				BackgroundColor3 = Color3.fromRGB(40, 40, 40),
-				BorderSizePixel = 0,
-				Text = "X",
-				Font = THEME.Font,
-				TextSize = 14,
-				TextColor3 = THEME.Accent,
-				ZIndex = 5,
-				Parent = Row,
-			})
-			makeStroke(ToggleButton, THEME.StrokeLight, 1)
+			local row = Instance.new("Frame")
+			row.Size = UDim2.new(1, 0, 0, 28)
+			row.BackgroundColor3 = THEME.Element
+			row.BorderSizePixel = 0
+			row.Parent = section
+			makeStroke(row, THEME.StrokeLight)
 
-			local function refresh(runCallback)
-				ToggleButton.Text = state and "/" or "X"
-				ToggleButton.TextColor3 = state and THEME.Success or THEME.Accent
-				ToggleButton.BackgroundColor3 = state
-					and Color3.fromRGB(20, 60, 20)
-					or Color3.fromRGB(40, 40, 40)
+			local label = Instance.new("TextLabel")
+			label.Size = UDim2.new(1, -40, 1, 0)
+			label.BackgroundTransparency = 1
+			label.Text = name
+			label.Font = THEME.Font
+			label.TextSize = 14
+			label.TextColor3 = THEME.Text
+			label.TextXAlignment = Enum.TextXAlignment.Center
+			label.Parent = row
 
-				if runCallback then
-					safeCall(callback, state)
+			local toggleBtn = Instance.new("TextButton")
+			toggleBtn.Size = UDim2.new(0, 28, 0, 22)
+			toggleBtn.Position = UDim2.new(1, -32, 0.5, -11)
+			toggleBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+			toggleBtn.BorderSizePixel = 0
+			toggleBtn.Text = "X"
+			toggleBtn.Font = THEME.Font
+			toggleBtn.TextScaled = true
+			toggleBtn.TextColor3 = Color3.fromRGB(255, 0, 0)
+			toggleBtn.Parent = row
+			makeStroke(toggleBtn, THEME.StrokeLight)
+
+			local function update(runCallback)
+				if state then
+					toggleBtn.Text = "/"
+					toggleBtn.TextColor3 = Color3.fromRGB(55, 255, 0)
+					toggleBtn.BackgroundColor3 = Color3.fromRGB(20, 60, 20)
+				else
+					toggleBtn.Text = "X"
+					toggleBtn.TextColor3 = Color3.fromRGB(255, 0, 0)
+					toggleBtn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 				end
+				if runCallback and callback then callback(state) end
 			end
 
-			connect(ToggleButton.MouseButton1Click, function()
+			toggleBtn.MouseButton1Click:Connect(function()
 				state = not state
-				refresh(true)
+				update(true)
 			end)
 
-			refresh(false)
-
-			return {
-				get = function()
-					return state
-				end,
-				set = function(value, silent)
-					state = value == true
-					refresh(not silent)
-				end,
-			}
+			-- На загрузке только рисуем состояние, не запускаем тяжёлый callback.
+			update(false)
+			return { get = function() return state end, set = function(v) state = v; update(true) end }
 		end
 
-		function Section:CreateSlider(name, minValue, maxValue, defaultValue, rounding, callback)
-			assert(maxValue > minValue, "CreateSlider: maxValue must be greater than minValue")
+		function Section:CreateSlider(name, minVal, maxVal, default, _, callback)
+			local container = Instance.new("Frame")
+			container.Size = UDim2.new(1, 0, 0, 40)
+			container.BackgroundColor3 = THEME.Element
+			container.BorderSizePixel = 0
+			container.Parent = section
+			makeStroke(container, THEME.StrokeLight)
 
-			local decimals = tonumber(rounding) or 0
-			local factor = 10 ^ decimals
-			local value = math.clamp(tonumber(defaultValue) or minValue, minValue, maxValue)
-			local Row = createRow(44)
+			local label = Instance.new("TextLabel")
+			label.Size = UDim2.new(1, 0, 0, 18)
+			label.BackgroundTransparency = 1
+			label.Text = name .. ": " .. tostring(default)
+			label.Font = THEME.Font
+			label.TextSize = 12
+			label.TextColor3 = THEME.Text
+			label.TextXAlignment = Enum.TextXAlignment.Center
+			label.Parent = container
 
-			local Label = create("TextLabel", {
-				Size = UDim2.new(1, 0, 0, 20),
-				BackgroundTransparency = 1,
-				Text = "",
-				Font = THEME.Font,
-				TextSize = 12,
-				TextColor3 = THEME.Text,
-				ZIndex = 5,
-				Parent = Row,
-			})
+			local track = Instance.new("Frame")
+			track.Size = UDim2.new(1, -12, 0, 14)
+			track.Position = UDim2.new(0, 6, 0, 22)
+			track.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+			track.BorderSizePixel = 0
+			track.Parent = container
 
-			local Track = create("Frame", {
-				Size = UDim2.new(1, -12, 0, 14),
-				Position = UDim2.fromOffset(6, 24),
-				BackgroundColor3 = Color3.fromRGB(25, 25, 25),
-				BorderSizePixel = 0,
-				Active = true,
-				ZIndex = 5,
-				Parent = Row,
-			})
+			local fill = Instance.new("Frame")
+			fill.Size = UDim2.new(0, 0, 1, 0)
+			fill.BackgroundColor3 = THEME.Accent
+			fill.BorderSizePixel = 0
+			fill.Parent = track
 
-			local Fill = create("Frame", {
-				Size = UDim2.fromScale(0, 1),
-				BackgroundColor3 = THEME.Accent,
-				BorderSizePixel = 0,
-				ZIndex = 6,
-				Parent = Track,
-			})
+			local value = default
 
-			local function formatValue(number)
-				if decimals <= 0 then
-					return tostring(math.floor(number + 0.5))
-				end
-
-				return string.format("%." .. decimals .. "f", number)
+			local function setValue(v, runCallback)
+				value = math.clamp(math.floor(v), minVal, maxVal)
+				local pct = (value - minVal) / (maxVal - minVal)
+				fill.Size = UDim2.new(pct, 0, 1, 0)
+				label.Text = name .. ": " .. tostring(value)
+				if runCallback and callback then callback(value) end
 			end
 
-			local function setValue(newValue, runCallback)
-				local rounded = math.floor(newValue * factor + 0.5) / factor
-				value = math.clamp(rounded, minValue, maxValue)
-				local percent = (value - minValue) / (maxValue - minValue)
-				Fill.Size = UDim2.fromScale(percent, 1)
-				Label.Text = tostring(name) .. ": " .. formatValue(value)
-
-				if runCallback then
-					safeCall(callback, value)
-				end
+			local function getPct(mouseX)
+				local pct = (mouseX - track.AbsolutePosition.X) / track.AbsoluteSize.X
+				return math.clamp(pct, 0, 1)
 			end
 
-			local sliderController = {}
+			local sliderController = {
+				setFromX = function(mouseX)
+					local pct = getPct(mouseX)
+					setValue(minVal + (maxVal - minVal) * pct, true)
+				end,
+			}
 
-			function sliderController.setFromX(mouseX)
-				if Track.AbsoluteSize.X <= 0 then
-					return
-				end
-
-				local percent = math.clamp(
-					(mouseX - Track.AbsolutePosition.X) / Track.AbsoluteSize.X,
-					0,
-					1
-				)
-				setValue(minValue + (maxValue - minValue) * percent, true)
-			end
-
-			connect(Track.InputBegan, function(input)
-				if input.UserInputType == Enum.UserInputType.MouseButton1
-					or input.UserInputType == Enum.UserInputType.Touch then
+			track.InputBegan:Connect(function(input)
+				if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 					activeSlider = sliderController
 					sliderController.setFromX(input.Position.X)
 				end
 			end)
 
-			setValue(value, false)
-
+			setValue(default, false)
 			return {
-				get = function()
-					return value
-				end,
-				set = function(newValue, silent)
-					setValue(tonumber(newValue) or value, not silent)
-				end,
+				get = function() return value end,
+				set = function(v) setValue(v, true) end,
 			}
 		end
 
-		function Section:CreateDropdown(name, options, defaultIndex, callback)
-			local values = options or {}
-			local current = values[defaultIndex or 1] or values[1] or "None"
-			local Row = createRow(28)
-			createRowLabel(Row, name, 174)
+		function Section:CreateColorPicker(name, defaultColor, callback)
+			local row = Instance.new("Frame")
+			row.Size = UDim2.new(1, 0, 0, 28)
+			row.BackgroundColor3 = THEME.Element
+			row.BorderSizePixel = 0
+			row.Parent = section
+			makeStroke(row, THEME.StrokeLight)
 
-			local DropdownButton = create("TextButton", {
-				AnchorPoint = Vector2.new(1, 0.5),
-				Position = UDim2.new(1, -4, 0.5, 0),
-				Size = UDim2.fromOffset(166, 22),
-				BackgroundColor3 = Color3.fromRGB(40, 40, 40),
-				BorderSizePixel = 0,
-				Text = tostring(current),
-				Font = THEME.Font,
-				TextSize = 12,
-				TextColor3 = THEME.Text,
-				TextTruncate = Enum.TextTruncate.AtEnd,
-				ZIndex = 5,
-				Parent = Row,
-			})
-			makeStroke(DropdownButton, THEME.StrokeLight, 1)
+			local label = Instance.new("TextLabel")
+			label.Size = UDim2.new(1, -40, 1, 0)
+			label.BackgroundTransparency = 1
+			label.Text = name
+			label.Font = THEME.Font
+			label.TextSize = 14
+			label.TextColor3 = THEME.Text
+			label.TextXAlignment = Enum.TextXAlignment.Center
+			label.Parent = row
 
-			local function containsValue(value)
-				for _, option in ipairs(values) do
-					if option == value then
-						return true
-					end
-				end
+			local colorBox = Instance.new("TextButton")
+			colorBox.Size = UDim2.new(0, 28, 0, 22)
+			colorBox.Position = UDim2.new(1, -32, 0.5, -11)
+			colorBox.BackgroundColor3 = defaultColor
+			colorBox.BorderSizePixel = 0
+			colorBox.Text = ""
+			colorBox.Parent = row
+			makeStroke(colorBox, THEME.StrokeLight)
 
-				return false
+			local popup
+			local popupOpen = false
+
+			local function closePopup()
+				if popup then popup:Destroy() popup = nil end
+				popupOpen = false
 			end
 
-			local function openDropdown()
-				closeActiveDropdown()
+			local function openPopup()
+				closePopup()
+				popupOpen = true
 
-				local visibleCount = math.max(1, math.min(#values, 7))
-				local relativeX = DropdownButton.AbsolutePosition.X - Main.AbsolutePosition.X
-				local relativeY = DropdownButton.AbsolutePosition.Y - Main.AbsolutePosition.Y
+				popup = Instance.new("Frame")
+				popup.Size = UDim2.new(0, 150, 0, 120)
+				popup.Position = UDim2.new(1, 5, 0, 0)
+				popup.BackgroundColor3 = THEME.Card
+				popup.BorderSizePixel = 0
+				popup.ZIndex = 10
+				popup.Parent = row
+				makeStroke(popup)
 
-				local List = create("ScrollingFrame", {
-					Name = "DropdownList",
-					Position = UDim2.fromOffset(relativeX, relativeY + DropdownButton.AbsoluteSize.Y + 2),
-					Size = UDim2.fromOffset(
-						math.max(166, DropdownButton.AbsoluteSize.X),
-						visibleCount * 24 + 4
-					),
-					BackgroundColor3 = THEME.Section,
-					BorderSizePixel = 0,
-					CanvasSize = UDim2.fromOffset(0, math.max(1, #values) * 24 + 4),
-					ScrollBarThickness = #values > visibleCount and 3 or 0,
-					ScrollBarImageColor3 = THEME.Accent,
-					ZIndex = 100,
-					Parent = Main,
-				})
-				makeStroke(List, THEME.Stroke, 1)
-				activeDropdown = List
+				local gl = Instance.new("UIGridLayout")
+				gl.CellSize = UDim2.new(0, 28, 0, 28)
+				gl.CellPadding = UDim2.new(0, 2, 0, 2)
+				gl.Parent = popup
 
-				create("UIPadding", {
-					PaddingTop = UDim.new(0, 2),
-					PaddingBottom = UDim.new(0, 2),
-					Parent = List,
-				})
+				local colors = {
+					Color3.fromRGB(255,0,0), Color3.fromRGB(255,128,0), Color3.fromRGB(255,255,0),
+					Color3.fromRGB(0,255,0), Color3.fromRGB(0,255,128), Color3.fromRGB(0,255,255),
+					Color3.fromRGB(0,128,255), Color3.fromRGB(0,0,255), Color3.fromRGB(128,0,255),
+					Color3.fromRGB(255,0,255), Color3.fromRGB(255,0,128), Color3.fromRGB(255,255,255),
+					Color3.fromRGB(128,128,128), Color3.fromRGB(0,0,0), Color3.fromRGB(255,128,128),
+					Color3.fromRGB(128,255,128), Color3.fromRGB(128,128,255), Color3.fromRGB(255,255,128),
+				}
 
-				create("UIListLayout", {
-					SortOrder = Enum.SortOrder.LayoutOrder,
-					Parent = List,
-				})
+				for _, c in ipairs(colors) do
+					local swatch = Instance.new("TextButton")
+					swatch.BackgroundColor3 = c
+					swatch.Text = ""
+					swatch.BorderSizePixel = 0
+					swatch.ZIndex = 11
+					swatch.Parent = popup
+					makeStroke(swatch, THEME.Stroke, 1)
 
-				if #values == 0 then
-					create("TextLabel", {
-						Size = UDim2.new(1, -4, 0, 24),
-						BackgroundTransparency = 1,
-						Text = "No players",
-						Font = THEME.Font,
-						TextSize = 12,
-						TextColor3 = THEME.TextDim,
-						ZIndex = 101,
-						Parent = List,
-					})
-				end
-
-				for _, option in ipairs(values) do
-					local optionValue = option
-					local Item = create("TextButton", {
-						Size = UDim2.new(1, -4, 0, 24),
-						BackgroundColor3 = optionValue == current
-							and Color3.fromRGB(40, 40, 40)
-							or Color3.fromRGB(20, 20, 20),
-						BorderSizePixel = 0,
-						Text = tostring(optionValue),
-						Font = THEME.Font,
-						TextSize = 12,
-						TextColor3 = THEME.Text,
-						TextTruncate = Enum.TextTruncate.AtEnd,
-						ZIndex = 101,
-						Parent = List,
-					})
-
-					Item.MouseButton1Click:Connect(function()
-						current = optionValue
-						DropdownButton.Text = tostring(optionValue)
-						closeActiveDropdown()
-						safeCall(callback, optionValue)
+					swatch.MouseButton1Click:Connect(function()
+						colorBox.BackgroundColor3 = c
+						if callback then callback(c) end
+						closePopup()
 					end)
 				end
 			end
 
-			connect(DropdownButton.MouseButton1Click, openDropdown)
+			colorBox.MouseButton1Click:Connect(function()
+				if popupOpen then closePopup() else openPopup() end
+			end)
 
-			return {
-				get = function()
-					return current
-				end,
-				set = function(value, silent)
-					current = value
-					DropdownButton.Text = tostring(value)
-					if not silent then
-						safeCall(callback, value)
-					end
-				end,
-				setOptions = function(newOptions)
-					values = newOptions or {}
-					if not containsValue(current) then
-						current = values[1] or "None"
-						DropdownButton.Text = tostring(current)
-					end
-					closeActiveDropdown()
-				end,
-			}
+			return { get = function() return colorBox.BackgroundColor3 end, set = function(c) colorBox.BackgroundColor3 = c end }
 		end
 
-		function Section:CreateKeybind(name, defaultKey, toggleMode, callback, isMenuKey)
-			local key = defaultKey or Enum.KeyCode.Unknown
-			local Row = createRow(28)
-			createRowLabel(Row, name, 78)
+		function Section:CreateDropdown(name, options, defaultIndex, callback)
+			local current = options[defaultIndex] or options[1]
+			local open = false
 
-			local KeyButton = create("TextButton", {
-				AnchorPoint = Vector2.new(1, 0.5),
-				Position = UDim2.new(1, -4, 0.5, 0),
-				Size = UDim2.fromOffset(70, 22),
-				BackgroundColor3 = Color3.fromRGB(40, 40, 40),
-				BorderSizePixel = 0,
-				Text = key.Name,
-				Font = THEME.Font,
-				TextSize = 12,
-				TextColor3 = THEME.Text,
-				TextTruncate = Enum.TextTruncate.AtEnd,
-				ZIndex = 5,
-				Parent = Row,
-			})
-			makeStroke(KeyButton, THEME.StrokeLight, 1)
+			local row = Instance.new("Frame")
+			row.Size = UDim2.new(1, 0, 0, 28)
+			row.BackgroundColor3 = THEME.Element
+			row.BorderSizePixel = 0
+			row.Parent = section
+			makeStroke(row, THEME.StrokeLight)
+
+			local label = Instance.new("TextLabel")
+			label.Size = UDim2.new(0.6, 0, 1, 0)
+			label.BackgroundTransparency = 1
+			label.Text = name
+			label.Font = THEME.Font
+			label.TextSize = 14
+			label.TextColor3 = THEME.Text
+			label.TextXAlignment = Enum.TextXAlignment.Center
+			label.Parent = row
+
+			local btn = Instance.new("TextButton")
+			btn.Size = UDim2.new(0, 80, 0, 22)
+			btn.Position = UDim2.new(1, -84, 0.5, -11)
+			btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+			btn.BorderSizePixel = 0
+			btn.Text = current
+			btn.Font = THEME.Font
+			btn.TextSize = 12
+			btn.TextColor3 = THEME.Text
+			btn.Parent = row
+			makeStroke(btn, THEME.StrokeLight)
+
+			local list
+
+			local function closeList()
+				if list then list:Destroy() list = nil end
+				open = false
+			end
+
+			local function openList()
+				closeList()
+				open = true
+
+				list = Instance.new("Frame")
+				list.Size = UDim2.new(0, 100, 0, #options * 24 + 4)
+				list.Position = UDim2.new(1, 5, 0, 0)
+				list.BackgroundColor3 = THEME.Card
+				list.BorderSizePixel = 0
+				list.ZIndex = 10
+				list.Parent = btn
+				makeStroke(list)
+
+				local l = Instance.new("UIListLayout")
+				l.Padding = UDim.new(0, 2)
+				l.Parent = list
+
+				for _, opt in ipairs(options) do
+					local item = Instance.new("TextButton")
+					item.Size = UDim2.new(1, 0, 0, 22)
+					item.BackgroundColor3 = (opt == current) and Color3.fromRGB(40,40,40) or Color3.fromRGB(20,20,20)
+					item.BorderSizePixel = 0
+					item.Text = opt
+					item.Font = THEME.Font
+					item.TextSize = 12
+					item.TextColor3 = THEME.Text
+					item.ZIndex = 11
+					item.Parent = list
+
+					item.MouseButton1Click:Connect(function()
+						current = opt
+						btn.Text = opt
+						if callback then callback(opt) end
+						closeList()
+					end)
+				end
+			end
+
+			btn.MouseButton1Click:Connect(function()
+				if open then closeList() else openList() end
+			end)
+
+			return { get = function() return current end, set = function(v) current = v; btn.Text = v end }
+		end
+
+		function Section:CreateKeybind(name, defaultKey, _, toggleMode, callback)
+			local key = defaultKey or Enum.KeyCode.Unknown
+
+			local row = Instance.new("Frame")
+			row.Size = UDim2.new(1, 0, 0, 28)
+			row.BackgroundColor3 = THEME.Element
+			row.BorderSizePixel = 0
+			row.Parent = section
+			makeStroke(row, THEME.StrokeLight)
+
+			local label = Instance.new("TextLabel")
+			label.Size = UDim2.new(0.6, 0, 1, 0)
+			label.BackgroundTransparency = 1
+			label.Text = name
+			label.Font = THEME.Font
+			label.TextSize = 14
+			label.TextColor3 = THEME.Text
+			label.TextXAlignment = Enum.TextXAlignment.Center
+			label.Parent = row
+
+			local btn = Instance.new("TextButton")
+			btn.Size = UDim2.new(0, 60, 0, 22)
+			btn.Position = UDim2.new(1, -64, 0.5, -11)
+			btn.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+			btn.BorderSizePixel = 0
+			btn.Text = key.Name
+			btn.Font = THEME.Font
+			btn.TextSize = 12
+			btn.TextColor3 = THEME.Text
+			btn.Parent = row
+			makeStroke(btn, THEME.StrokeLight)
 
 			local binding = {
 				key = key,
-				toggleMode = toggleMode == true,
-				callback = callback,
-				isMenuKey = isMenuKey == true,
 				active = false,
 				listening = false,
-				button = KeyButton,
+				toggleMode = toggleMode == true,
+				callback = callback,
+				button = btn,
 			}
 			table.insert(keybinds, binding)
 
-			connect(KeyButton.MouseButton1Click, function()
+			btn.MouseButton1Click:Connect(function()
 				for _, otherBinding in ipairs(keybinds) do
 					if otherBinding ~= binding and otherBinding.listening then
 						otherBinding.listening = false
@@ -986,21 +1085,15 @@ function Library:CreateTab(name)
 				end
 
 				binding.listening = true
-				KeyButton.Text = "..."
-				KeyButton.TextColor3 = THEME.Accent
+				btn.Text = "..."
+				btn.TextColor3 = THEME.Accent
 			end)
 
 			return {
-				get = function()
-					return binding.key
-				end,
+				get = function() return binding.key end,
 				set = function(newKey)
 					binding.key = newKey
-					KeyButton.Text = newKey.Name
-
-					if binding.isMenuKey then
-						Library:SetMenuKey(newKey)
-					end
+					btn.Text = newKey.Name
 				end,
 			}
 		end
@@ -1011,677 +1104,136 @@ function Library:CreateTab(name)
 	return Tab
 end
 
--- ===== SCRIPT STATE =====
-
-local scriptRunning = true
-local controls = {}
-
-local speedValue = 16
-local jumpValue = 50
-local gravityValue = 196.2
-
-local infinityJumpEnabled = false
-local autoBhopEnabled = false
-local teleportClickEnabled = false
-local farmCoinsEnabled = false
-
-local farmRadius = 50
-local updateInterval = 1 / 30
-local lastUpdate = 0
-local lastCoinUpdate = 0
-
-local flyEnabled = false
-local flyRunning = false
-local flyBodyGyro = nil
-local flyBodyVelocity = nil
-local flyMaxSpeed = 50
-
-local fogEnabled = false
-local fogDensity = 0.5
-
-local loopConnection = nil
-local coinAddedConnection = nil
-local characterAddedConnection = nil
-local teleportClickConnection = nil
-local playerAddedConnection = nil
-local playerRemovingConnection = nil
-
-local coinCache = {}
-
-local originalLighting = {
-	Ambient = Lighting.Ambient,
-	Brightness = Lighting.Brightness,
-	OutdoorAmbient = Lighting.OutdoorAmbient,
-	FogStart = Lighting.FogStart,
-	FogEnd = Lighting.FogEnd,
-	GlobalShadows = Lighting.GlobalShadows,
-}
-
-local function getCharacter()
-	return LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+-- ===== ДОБАВЛЯЕМ МЕТОД ДЛЯ УСТАНОВКИ ЗАГОЛОВКА =====
+function Library:SetTitle(title)
+	LibGui.Name.Text = title
 end
 
-local function getHumanoid()
-	local character = getCharacter()
-	return character and character:FindFirstChildOfClass("Humanoid")
+function Library:SetVisible(visible)
+	LibGui.LibGui.Enabled = visible == true
 end
 
-local function getRoot()
-	local character = getCharacter()
-	return character and character:FindFirstChild("HumanoidRootPart")
+function Library:Toggle()
+	LibGui.LibGui.Enabled = not LibGui.LibGui.Enabled
 end
 
-local function applySpeedJump()
-	local humanoid = getHumanoid()
-	if not humanoid then
-		return
+-- ===== ПЕРЕТАСКИВАНИЕ GUI =====
+local guiDragging = false
+local guiDragStart = nil
+local guiStartPos = nil
+
+LibGui.I.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		guiDragging = true
+		guiDragStart = input.Position
+		guiStartPos = LibGui.Main.Position
 	end
+end)
 
-	pcall(function()
-		humanoid.WalkSpeed = speedValue
-		humanoid.JumpPower = jumpValue
-	end)
-end
-
-local function collectCoin(coin)
-	if not coin or not coin.Parent or not coin:IsA("BasePart") then
-		return
+UserInputService.InputChanged:Connect(function(input)
+	if guiDragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+		local delta = input.Position - guiDragStart
+		LibGui.Main.Position = UDim2.new(
+			guiStartPos.X.Scale, guiStartPos.X.Offset + delta.X,
+			guiStartPos.Y.Scale, guiStartPos.Y.Offset + delta.Y
+		)
 	end
+end)
 
-	local root = getRoot()
-	if root then
-		coin.CFrame = root.CFrame * CFrame.new(0, 2, 0)
+UserInputService.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		guiDragging = false
 	end
-end
+end)
 
-local function cacheExistingCoins()
-	table.clear(coinCache)
+-- ===== ИЗМЕНЕНИЕ РАЗМЕРА ОКНА =====
+local MIN_WIDTH = 250
+local MIN_HEIGHT = 150
 
-	for _, object in ipairs(Workspace:GetDescendants()) do
-		if object:IsA("BasePart") and object.Name == "Coin" then
-			coinCache[object] = true
-		end
+local resizeHandle = Instance.new("Frame")
+resizeHandle.Name = "ResizeHandle"
+resizeHandle.Size = UDim2.new(0, 16, 0, 16)
+resizeHandle.Position = UDim2.new(1, -16, 1, -16)
+resizeHandle.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+resizeHandle.BorderSizePixel = 0
+resizeHandle.ZIndex = 5
+resizeHandle.Parent = LibGui.Main
+
+local resizeStroke = Instance.new("UIStroke")
+resizeStroke.Color = Color3.fromRGB(60, 60, 60)
+resizeStroke.Thickness = 1
+resizeStroke.Parent = resizeHandle
+
+-- Диагональные полоски для индикатора
+local line1 = Instance.new("Frame")
+line1.Size = UDim2.new(0, 10, 0, 2)
+line1.Position = UDim2.new(0.5, -5, 0.2, 0)
+line1.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+line1.BorderSizePixel = 0
+line1.Rotation = 45
+line1.Parent = resizeHandle
+
+local line2 = Instance.new("Frame")
+line2.Size = UDim2.new(0, 7, 0, 2)
+line2.Position = UDim2.new(0.5, -3, 0.5, -2)
+line2.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+line2.BorderSizePixel = 0
+line2.Rotation = 45
+line2.Parent = resizeHandle
+
+local line3 = Instance.new("Frame")
+line3.Size = UDim2.new(0, 4, 0, 2)
+line3.Position = UDim2.new(0.5, -1, 0.8, -4)
+line3.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
+line3.BorderSizePixel = 0
+line3.Rotation = 45
+line3.Parent = resizeHandle
+
+local resizing = false
+local resizeStartPos = nil
+local resizeStartSize = nil
+
+resizeHandle.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		resizing = true
+		resizeStartPos = input.Position
+		resizeStartSize = LibGui.Main.Size
 	end
-end
+end)
 
-local function collectNearbyCoins()
-	if not farmCoinsEnabled then
-		return
+UserInputService.InputChanged:Connect(function(input)
+	if resizing and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+		local delta = input.Position - resizeStartPos
+		local newWidth = math.max(MIN_WIDTH, resizeStartSize.X.Offset + delta.X)
+		local newHeight = math.max(MIN_HEIGHT, resizeStartSize.Y.Offset + delta.Y)
+		LibGui.Main.Size = UDim2.new(0, newWidth, 0, newHeight)
 	end
+end)
 
-	local root = getRoot()
-	if not root then
-		return
+UserInputService.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+		resizing = false
 	end
+end)
 
-	local rootPosition = root.Position
+-- Кнопка закрытия (X)
+LibGui.X.MouseButton1Click:Connect(function()
+	LibGui.LibGui.Enabled = false
+	print("[GUI] закрыт")
+end)
 
-	for coin in pairs(coinCache) do
-		if not coin.Parent then
-			coinCache[coin] = nil
-		elseif (coin.Position - rootPosition).Magnitude <= farmRadius then
-			collectCoin(coin)
-		end
-	end
-end
-
-local function setCoinFarmConnection(enabled)
-	if coinAddedConnection then
-		coinAddedConnection:Disconnect()
-		coinAddedConnection = nil
-	end
-
-	if not enabled then
-		table.clear(coinCache)
-		return
-	end
-
-	cacheExistingCoins()
-	coinAddedConnection = Workspace.DescendantAdded:Connect(function(descendant)
-		if farmCoinsEnabled and descendant:IsA("BasePart") and descendant.Name == "Coin" then
-			coinCache[descendant] = true
-		end
-	end)
-end
-
-local stopFly
-
-local function startFly()
-	if flyRunning or not flyEnabled then
-		return
-	end
-
-	local character = getCharacter()
-	local humanoid = getHumanoid()
-	if not character or not humanoid then
-		return
-	end
-
-	local torso = character:FindFirstChild("Torso")
-		or character:FindFirstChild("UpperTorso")
-		or getRoot()
-
-	if not torso then
-		return
-	end
-
-	flyBodyGyro = Instance.new("BodyGyro")
-	flyBodyGyro.P = 9e4
-	flyBodyGyro.MaxTorque = Vector3.new(9e9, 9e9, 9e9)
-	flyBodyGyro.CFrame = torso.CFrame
-	flyBodyGyro.Parent = torso
-
-	flyBodyVelocity = Instance.new("BodyVelocity")
-	flyBodyVelocity.Velocity = Vector3.new(0, 0.1, 0)
-	flyBodyVelocity.MaxForce = Vector3.new(9e9, 9e9, 9e9)
-	flyBodyVelocity.Parent = torso
-
-	humanoid.PlatformStand = true
-
-	local animate = character:FindFirstChild("Animate")
-	if animate then
-		animate.Disabled = true
-	end
-
-	flyRunning = true
-	local currentSpeed = 0
-
-	RunService:BindToRenderStep(
-		"OurLibFlyLoop",
-		Enum.RenderPriority.Camera.Value + 1,
-		function()
-			if not scriptRunning or not flyRunning or not flyEnabled then
-				stopFly()
-				return
-			end
-
-			if not flyBodyGyro or not flyBodyVelocity or not torso.Parent then
-				stopFly()
-				return
-			end
-
-			local forward = UserInputService:IsKeyDown(Enum.KeyCode.W) and 1 or 0
-			local backward = UserInputService:IsKeyDown(Enum.KeyCode.S) and -1 or 0
-			local left = UserInputService:IsKeyDown(Enum.KeyCode.A) and -1 or 0
-			local right = UserInputService:IsKeyDown(Enum.KeyCode.D) and 1 or 0
-			local up = UserInputService:IsKeyDown(Enum.KeyCode.Space) and 1 or 0
-			local down = UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) and -1 or 0
-
-			local movingHorizontal = left + right ~= 0 or forward + backward ~= 0
-
-			if movingHorizontal then
-				currentSpeed = math.min(
-					currentSpeed + 0.5 + currentSpeed / math.max(flyMaxSpeed, 1),
-					flyMaxSpeed
-				)
-			else
-				currentSpeed = math.max(currentSpeed - 1, 0)
-			end
-
-			local camera = Workspace.CurrentCamera
-			if not camera then
-				return
-			end
-
-			local cameraCFrame = camera.CFrame
-			local moveDirection = cameraCFrame.LookVector * (forward + backward)
-				+ cameraCFrame.RightVector * (left + right)
-			local verticalDirection = Vector3.new(0, up + down, 0)
-
-			if moveDirection.Magnitude > 1 then
-				moveDirection = moveDirection.Unit
-			end
-
-			flyBodyVelocity.Velocity = moveDirection * currentSpeed
-				+ verticalDirection * math.max(currentSpeed + 10, 25)
-
-			if moveDirection.Magnitude > 0.01 then
-				flyBodyGyro.CFrame = CFrame.lookAt(
-					torso.Position,
-					torso.Position + moveDirection
-				)
-			else
-				flyBodyGyro.CFrame = CFrame.new(torso.Position, torso.Position + cameraCFrame.LookVector)
-			end
-		end
-	)
-end
-
-stopFly = function()
-	if flyRunning then
-		RunService:UnbindFromRenderStep("OurLibFlyLoop")
-	end
-
-	flyRunning = false
-
-	if flyBodyGyro then
-		flyBodyGyro:Destroy()
-		flyBodyGyro = nil
-	end
-
-	if flyBodyVelocity then
-		flyBodyVelocity:Destroy()
-		flyBodyVelocity = nil
-	end
-
-	local character = LocalPlayer.Character
-	local humanoid = character and character:FindFirstChildOfClass("Humanoid")
-
-	if humanoid then
-		humanoid.PlatformStand = false
-	end
-
-	local animate = character and character:FindFirstChild("Animate")
-	if animate then
-		animate.Disabled = false
-	end
-end
-
-local function processLoop()
-	local now = os.clock()
-	if now - lastUpdate < updateInterval then
-		return
-	end
-
-	lastUpdate = now
-
-	local humanoid = getHumanoid()
-	if humanoid then
-		pcall(function()
-			humanoid.WalkSpeed = speedValue
-			humanoid.JumpPower = jumpValue
-		end)
-
-		if infinityJumpEnabled then
-			local state = humanoid:GetState()
-			if state == Enum.HumanoidStateType.Jumping
-				or state == Enum.HumanoidStateType.Freefall then
-				humanoid.Jump = true
-			end
-		end
-
-		if autoBhopEnabled then
-			local state = humanoid:GetState()
-			if state == Enum.HumanoidStateType.Landed
-				or state == Enum.HumanoidStateType.Running then
-				humanoid.Jump = true
-			end
-		end
-	end
-
-	Workspace.Gravity = gravityValue
-
-	if farmCoinsEnabled and now - lastCoinUpdate >= 0.1 then
-		lastCoinUpdate = now
-		collectNearbyCoins()
-	end
-end
-
-local function loopIsNeeded()
-	return infinityJumpEnabled
-		or autoBhopEnabled
-		or farmCoinsEnabled
-		or speedValue ~= 16
-		or jumpValue ~= 50
-		or math.abs(gravityValue - 196.2) > 0.001
-end
-
-local function updateLoopState()
-	if loopIsNeeded() then
-		if not loopConnection then
-			loopConnection = RunService.Heartbeat:Connect(processLoop)
-		end
-	elseif loopConnection then
-		loopConnection:Disconnect()
-		loopConnection = nil
-	end
-end
-
-local function applyFog()
-	if fogEnabled then
-		Lighting.FogStart = 0
-		Lighting.FogEnd = math.max(5, 1000 * (1 - fogDensity))
+-- Кнопка сворачивания (-)
+local minimized = false
+LibGui._.MouseButton1Click:Connect(function()
+	minimized = not minimized
+	LibGui.V.Visible = not minimized
+	LibGui.C.Visible = not minimized
+	if minimized then
+		LibGui.Main.Size = UDim2.new(0, 392, 0, 37)
 	else
-		Lighting.FogStart = originalLighting.FogStart
-		Lighting.FogEnd = originalLighting.FogEnd
-	end
-end
-
-local function deleteInBatches(classNames)
-	local objects = Workspace:GetDescendants()
-	local deleted = 0
-
-	for _, object in ipairs(objects) do
-		if classNames[object.ClassName] then
-			object:Destroy()
-			deleted = deleted + 1
-
-			if deleted % 200 == 0 then
-				task.wait()
-			end
-		end
-	end
-
-	return deleted
-end
-
-local function getPlayerNames()
-	local names = {}
-
-	for _, player in ipairs(Players:GetPlayers()) do
-		if player ~= LocalPlayer then
-			table.insert(names, player.Name)
-		end
-	end
-
-	table.sort(names)
-	return names
-end
-
--- ===== TABS AND CONTROLS =====
-
-local MovementTab = Library:CreateTab("Movement")
-local FarmTab = Library:CreateTab("Farm")
-local VisualTab = Library:CreateTab("Visual")
--- Последняя вкладка-кнопка содержит настройки для GitHub-версии скрипта.
-local SettingsTab = Library:CreateTab("Settings")
-
-local MovementSection = MovementTab:CreateSection("Movement Settings")
-local ExtraSection = MovementTab:CreateSection("Extra")
-local FarmSection = FarmTab:CreateSection("Coin Farm")
-local VisualSection = VisualTab:CreateSection("Visual Settings")
-local MenuSection = SettingsTab:CreateSection("Menu")
-
-MovementSection:CreateSlider("Speed", 12, 350, 16, 0, function(value)
-	speedValue = value
-	applySpeedJump()
-	updateLoopState()
-end)
-
-MovementSection:CreateSlider("Jump Power", 40, 200, 50, 0, function(value)
-	jumpValue = value
-	applySpeedJump()
-	updateLoopState()
-end)
-
-controls.InfJump = MovementSection:CreateToggle("Infinity Jump", function(value)
-	infinityJumpEnabled = value
-	updateLoopState()
-end)
-
-MovementSection:CreateSlider("Gravity", 0, 200, 196.2, 1, function(value)
-	gravityValue = value
-	Workspace.Gravity = value
-	updateLoopState()
-end)
-
-MovementSection:CreateButton("Dash (forward)", function()
-	local root = getRoot()
-	if not root then
-		return
-	end
-
-	local direction = root.CFrame.LookVector * 50
-	root.AssemblyLinearVelocity = Vector3.new(direction.X, root.AssemblyLinearVelocity.Y, direction.Z)
-end)
-
-local PlayerDropdown = ExtraSection:CreateDropdown(
-	"Select Player",
-	getPlayerNames(),
-	1,
-	function()
-		-- Выбор сохраняется внутри элемента.
-	end
-)
-
-ExtraSection:CreateButton("Refresh player list", function()
-	PlayerDropdown.setOptions(getPlayerNames())
-end)
-
-ExtraSection:CreateButton("Teleport to selected", function()
-	local targetName = PlayerDropdown.get()
-	if not targetName or targetName == "None" then
-		return
-	end
-
-	local targetPlayer = Players:FindFirstChild(targetName)
-	local targetCharacter = targetPlayer and targetPlayer.Character
-	local targetRoot = targetCharacter and targetCharacter:FindFirstChild("HumanoidRootPart")
-	local root = getRoot()
-
-	if root and targetRoot then
-		root.CFrame = targetRoot.CFrame * CFrame.new(0, 3, 0)
+		LibGui.Main.Size = UDim2.new(0, 392, 0, 460)
 	end
 end)
 
-controls.TeleportClick = ExtraSection:CreateToggle("Teleport on mouse click", function(value)
-	teleportClickEnabled = value
-end)
-
-controls.Fly = ExtraSection:CreateToggle("Fly mode", function(value)
-	flyEnabled = value
-
-	if value then
-		startFly()
-	else
-		stopFly()
-	end
-end)
-
-ExtraSection:CreateSlider("Fly Speed", 50, 350, 50, 0, function(value)
-	flyMaxSpeed = value
-end)
-
-controls.AutoBhop = ExtraSection:CreateToggle("Auto Bhop", function(value)
-	autoBhopEnabled = value
-	updateLoopState()
-end)
-
-controls.FarmCoins = FarmSection:CreateToggle("Collect Summer Coins", function(value)
-	farmCoinsEnabled = value
-	setCoinFarmConnection(value)
-
-	if value then
-		collectNearbyCoins()
-	end
-
-	updateLoopState()
-end)
-
-FarmSection:CreateSlider("Collection Radius", 10, 500, 50, 0, function(value)
-	farmRadius = value
-end)
-
-VisualSection:CreateButton("Delete all textures", function()
-	task.spawn(function()
-		local count = deleteInBatches({
-			Texture = true,
-			Decal = true,
-		})
-		print("[OurLib] Deleted textures and decals:", count)
-	end)
-end)
-
-controls.Fog = VisualSection:CreateToggle("Enable Fog", function(value)
-	fogEnabled = value
-	applyFog()
-end)
-
-VisualSection:CreateSlider("Fog Density", 0, 1, 0.5, 2, function(value)
-	fogDensity = value
-	applyFog()
-end)
-
-controls.RemoveShadows = VisualSection:CreateToggle("Remove Shadows", function(value)
-	Lighting.GlobalShadows = not value
-end)
-
-VisualSection:CreateButton("Remove all particles", function()
-	task.spawn(function()
-		local count = deleteInBatches({
-			ParticleEmitter = true,
-		})
-		print("[OurLib] Deleted particles:", count)
-	end)
-end)
-
-controls.NightMode = VisualSection:CreateToggle("Night Mode", function(value)
-	if value then
-		Lighting.Ambient = Color3.new(0.05, 0.05, 0.05)
-		Lighting.Brightness = 0.2
-		Lighting.OutdoorAmbient = Color3.new(0.05, 0.05, 0.05)
-	else
-		Lighting.Ambient = originalLighting.Ambient
-		Lighting.Brightness = originalLighting.Brightness
-		Lighting.OutdoorAmbient = originalLighting.OutdoorAmbient
-	end
-end)
-
-local unloadScript
-
-MenuSection:CreateKeybind(
-	"Menu Key",
-	Enum.KeyCode.RightShift,
-	false,
-	nil,
-	true
-)
-
-MenuSection:CreateSlider("UI Scale", 75, 125, 100, 0, function(value)
-	Library:SetScale(value / 100)
-end)
-
-MenuSection:CreateButton("Reset window", function()
-	Library:ResetWindow()
-end)
-
-MenuSection:CreateLabel("GitHub loader", "Ready")
-MenuSection:CreateLabel("External UI downloads", "Disabled")
-
-MenuSection:CreateButton("Hide GUI", function()
-	Library:SetVisible(false)
-end)
-
-MenuSection:CreateButton("Unload", function()
-	if unloadScript then
-		unloadScript()
-	end
-end)
-
--- ===== SINGLE FEATURE CONNECTIONS =====
-
-teleportClickConnection = Mouse.Button1Down:Connect(function()
-	if not scriptRunning or not teleportClickEnabled then
-		return
-	end
-
-	local root = getRoot()
-	if root then
-		local targetPosition = Mouse.Hit.Position
-		root.CFrame = CFrame.new(targetPosition.X, targetPosition.Y + 3, targetPosition.Z)
-	end
-end)
-
-local function refreshPlayerDropdown()
-	PlayerDropdown.setOptions(getPlayerNames())
-end
-
-playerAddedConnection = Players.PlayerAdded:Connect(refreshPlayerDropdown)
-playerRemovingConnection = Players.PlayerRemoving:Connect(function()
-	task.defer(refreshPlayerDropdown)
-end)
-
-characterAddedConnection = LocalPlayer.CharacterAdded:Connect(function()
-	if flyRunning then
-		stopFly()
-	end
-
-	task.wait(0.5)
-
-	if not scriptRunning then
-		return
-	end
-
-	applySpeedJump()
-	updateLoopState()
-
-	if flyEnabled then
-		startFly()
-	end
-end)
-
--- ===== CLEAN UNLOAD =====
-
-local originalGravity = Workspace.Gravity
-
-unloadScript = function()
-	if not scriptRunning then
-		return
-	end
-
-	scriptRunning = false
-	flyEnabled = false
-	farmCoinsEnabled = false
-	teleportClickEnabled = false
-
-	stopFly()
-
-	if loopConnection then
-		loopConnection:Disconnect()
-		loopConnection = nil
-	end
-
-	if coinAddedConnection then
-		coinAddedConnection:Disconnect()
-		coinAddedConnection = nil
-	end
-
-	if characterAddedConnection then
-		characterAddedConnection:Disconnect()
-		characterAddedConnection = nil
-	end
-
-	if teleportClickConnection then
-		teleportClickConnection:Disconnect()
-		teleportClickConnection = nil
-	end
-
-	if playerAddedConnection then
-		playerAddedConnection:Disconnect()
-		playerAddedConnection = nil
-	end
-
-	if playerRemovingConnection then
-		playerRemovingConnection:Disconnect()
-		playerRemovingConnection = nil
-	end
-
-	Workspace.Gravity = originalGravity
-	Lighting.Ambient = originalLighting.Ambient
-	Lighting.Brightness = originalLighting.Brightness
-	Lighting.OutdoorAmbient = originalLighting.OutdoorAmbient
-	Lighting.FogStart = originalLighting.FogStart
-	Lighting.FogEnd = originalLighting.FogEnd
-	Lighting.GlobalShadows = originalLighting.GlobalShadows
-
-	Library:Destroy()
-	print("[OurLib] Script unloaded")
-end
-
--- ===== INITIAL APPLY =====
-
-Library:SetTitle("Advanced Script | RightShift")
-applySpeedJump()
-applyFog()
-
-print("[OurLib] Script loaded successfully")
-
---[[
-	ОДНА СТРОКА ДЛЯ ЗАПУСКА ПОСЛЕ ЗАГРУЗКИ ФАЙЛА НА GITHUB:
-
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/USERNAME/REPOSITORY/main/our_lib_script.lua"))()
-
-	На GitHub лучше назвать файл our_lib_script.lua.
-	Замени USERNAME и REPOSITORY на свои данные GitHub.
-	Клавишу меню и масштаб после запуска можно менять во вкладке Settings.
-]]
+LibGui.Library = Library
+return Library

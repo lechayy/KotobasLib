@@ -1,0 +1,200 @@
+17. ЗАПУСК ЧЕРЕЗ GITHUB ОДНОЙ СТРОКОЙ
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/USERNAME/REPOSITORY/main/our_lib_script.lua"))()
+
+1. НАЗВАНИЕ ОКНА
+
+Library:SetTitle("Название скрипта | RightShift")
+
+
+2. СОЗДАТЬ ВКЛАДКУ
+
+local MyTab = Library:CreateTab("Название вкладки")
+
+
+3. СОЗДАТЬ СЕКЦИЮ ВО ВКЛАДКЕ
+
+local MySection = MyTab:CreateSection("Название секции")
+
+
+4. СОЗДАТЬ КНОПКУ
+
+MySection:CreateButton("Название кнопки", function()
+	print("Кнопка нажата")
+end)
+
+
+5. СОЗДАТЬ ТЕКСТ
+
+MySection:CreateLabel("Текст")
+
+Или текст со значением:
+
+local Status = MySection:CreateLabel("Status", "Ready")
+
+Изменить текст:
+
+Status.set("Status: Working")
+
+
+6. СОЗДАТЬ TOGGLE
+
+local MyToggle = MySection:CreateToggle("Название функции", function(value)
+	if value then
+		print("Включено")
+	else
+		print("Выключено")
+	end
+end)
+
+Включить Toggle через код:
+
+MyToggle.set(true)
+
+Выключить Toggle через код:
+
+MyToggle.set(false)
+
+Узнать состояние:
+
+print(MyToggle.get())
+
+
+7. СОЗДАТЬ SLIDER
+
+local MySlider = MySection:CreateSlider(
+	"Speed", -- название
+	10,      -- минимум
+	300,     -- максимум
+	16,      -- значение по умолчанию
+	0,       -- количество цифр после точки
+	function(value)
+		print("Значение:", value)
+	end
+)
+
+Установить значение:
+
+MySlider.set(100)
+
+Получить значение:
+
+print(MySlider.get())
+
+
+8. СОЗДАТЬ DROPDOWN
+
+local MyDropdown = MySection:CreateDropdown(
+	"Mode",
+	{"Normal", "Fast", "Safe"},
+	1,
+	function(value)
+		print("Выбрано:", value)
+	end
+)
+
+Получить выбранное значение:
+
+print(MyDropdown.get())
+
+Выбрать значение через код:
+
+MyDropdown.set("Fast")
+
+Заменить варианты:
+
+MyDropdown.setOptions({"One", "Two", "Three"})
+
+
+9. СОЗДАТЬ KEYBIND
+
+local MyBind = MySection:CreateKeybind(
+	"Название бинда",
+	Enum.KeyCode.F,
+	true,
+	function(value)
+		print("Состояние:", value)
+	end,
+	false
+)
+
+Изменить клавишу:
+
+MyBind.set(Enum.KeyCode.G)
+
+
+10. КЛАВИША ОТКРЫТИЯ МЕНЮ
+
+Library:SetMenuKey(Enum.KeyCode.RightShift)
+
+
+11. МАСШТАБ ОКНА
+
+Library:SetScale(1)
+
+0.75 = маленькое окно
+1.00 = обычное окно
+1.25 = большое окно
+
+
+12. СКРЫТЬ И ПОКАЗАТЬ ОКНО
+
+Скрыть:
+
+Library:SetVisible(false)
+
+Показать:
+
+Library:SetVisible(true)
+
+Переключить:
+
+Library:Toggle()
+
+
+13. СБРОСИТЬ ПОЛОЖЕНИЕ ОКНА
+
+Library:ResetWindow()
+
+
+14. УДАЛИТЬ ОКНО
+
+Library:Destroy()
+
+
+15. ПОЛНЫЙ ПРОСТОЙ ПРИМЕР
+
+local MyTab = Library:CreateTab("My Tab")
+local MySection = MyTab:CreateSection("Main")
+
+local Enabled = false
+local Power = 50
+
+MySection:CreateToggle("Enable", function(value)
+	Enabled = value
+	print("Enable:", Enabled)
+end)
+
+MySection:CreateSlider("Power", 0, 100, 50, 0, function(value)
+	Power = value
+	print("Power:", Power)
+end)
+
+MySection:CreateButton("Run", function()
+	print("Enabled:", Enabled)
+	print("Power:", Power)
+end)
+
+
+16. КУДА ВСТАВЛЯТЬ
+
+В полном скрипте найди:
+
+-- ===== TABS AND CONTROLS =====
+
+Свои вкладки и кнопки добавляй там.
+
+Чтобы Settings была последней, свою вкладку создавай ДО этой строки:
+
+local SettingsTab = Library:CreateTab("Settings")
+

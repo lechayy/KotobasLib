@@ -1236,4 +1236,3 @@ LibGui._.MouseButton1Click:Connect(function()
 end)
 
 LibGui.Library = Library
-return Library
